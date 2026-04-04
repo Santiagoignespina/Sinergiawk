@@ -7,7 +7,7 @@ type InputMode = "text" | "audio";
 const N8N_WEBHOOK_URL = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || "";
 
 export default function Contacto() {
-  const [form, setForm] = useState({ nombre: "", email: "", mensaje: "", audio: null as Blob | null });
+  const [form, setForm] = useState({ nombre: "", email: "", celular: "", mensaje: "", audio: null as Blob | null });
   const [inputMode, setInputMode] = useState<InputMode>("text");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -32,23 +32,32 @@ export default function Contacto() {
 
     setLoading(true);
     try {
-      const payload = new FormData();
-      payload.append("nombre", form.nombre);
-      payload.append("email", form.email);
-      payload.append("tipo", inputMode);
-
-      if (inputMode === "text") {
-        payload.append("mensaje", form.mensaje);
-      } else if (form.audio) {
-        payload.append("audio", form.audio, "mensaje.webm");
+      let audioBase64: string | null = null;
+      if (inputMode === "audio" && form.audio) {
+        const buffer = await form.audio.arrayBuffer();
+        audioBase64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
       }
 
+      const payload = {
+        nombre: form.nombre,
+        email: form.email,
+        celular: form.celular,
+        tipo: inputMode,
+        mensaje: inputMode === "text" ? form.mensaje : null,
+        audio: audioBase64,
+        audioMime: audioBase64 ? "audio/webm" : null,
+      };
+
       if (N8N_WEBHOOK_URL) {
-        const res = await fetch(N8N_WEBHOOK_URL, { method: "POST", body: payload });
+        const res = await fetch(N8N_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
         if (!res.ok) throw new Error("Error al enviar");
       } else {
         await new Promise((r) => setTimeout(r, 1000));
-        console.log("Form data (dev):", Object.fromEntries(payload.entries()));
+        console.log("Form data (dev):", payload);
       }
 
       setSuccess(true);
@@ -114,6 +123,18 @@ export default function Contacto() {
                 className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00C8E8]/50 transition-colors"
               />
             </div>
+          </div>
+
+          {/* Celular */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-white/60 text-sm">Celular</label>
+            <input
+              type="tel"
+              placeholder="+54 9 11 1234-5678"
+              value={form.celular}
+              onChange={(e) => setForm({ ...form, celular: e.target.value })}
+              className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#00C8E8]/50 transition-colors"
+            />
           </div>
 
           {/* Tipo de mensaje */}
