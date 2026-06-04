@@ -76,7 +76,7 @@ export default function Landings() {
               rel="noopener noreferrer"
               className="group card-hover bg-[#121212] border border-white/10 hover:border-[#FF4D00]/40 rounded-2xl overflow-hidden flex flex-col"
             >
-              <div className="h-48 border-b border-white/10 bg-[#0A0A0A] overflow-hidden relative">
+              <div className="h-48 border-b border-white/10 bg-[#0A0A0A] overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={p.previewImage}
@@ -84,11 +84,6 @@ export default function Landings() {
                   loading="lazy"
                   className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
                 />
-                {!isVercel(p.liveUrl) && (
-                  <span className="absolute top-2 right-2 text-[10px] font-semibold uppercase tracking-wider bg-[#FF4D00] text-white px-2 py-0.5 rounded-full">
-                    Dominio propio
-                  </span>
-                )}
               </div>
 
               <div className="p-5 flex flex-col flex-1">
