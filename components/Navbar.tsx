@@ -23,7 +23,7 @@ export default function Navbar() {
         </a>
         <div className="hidden md:flex items-center gap-8 text-sm text-white/70">
           <a href="#landings" className="hover:text-[#FF4D00] transition-colors">Landings</a>
-          <a href="#casos" className="hover:text-[#FF4D00] transition-colors">Sistemas</a>
+          <a href="#sistemas" className="hover:text-[#FF4D00] transition-colors">Sistemas</a>
           <a href="#automatizaciones" className="hover:text-[#FF4D00] transition-colors">Automatizaciones</a>
           <a href="#contacto" className="hover:text-[#FF4D00] transition-colors">Contacto</a>
         </div>

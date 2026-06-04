@@ -36,9 +36,9 @@ export const projects: Project[] = [
   // ───────────────────────── CASOS DESTACADOS (sistemas con demo interactiva)
   {
     id: "mrbracket",
-    name: "Dashboard de Gestión Clínica",
+    name: "Dashboard de gestión para clínica",
     description:
-      "Aplicación web de gestión comercial para clínica dental con múltiples sucursales. Centraliza análisis de ventas, pacientes y profesionales en tiempo real — KPIs de facturación, búsqueda avanzada de pacientes y ranking de profesionales por comisiones y productividad.",
+      "Panel de gestión comercial para una clínica con múltiples sucursales: KPIs de facturación en tiempo real, búsqueda avanzada de pacientes y ranking del equipo. Con IA que resume el día y avisa cuando la facturación se sale de lo normal.",
     tags: ["React", "TypeScript", "Supabase"],
     demo: "DashboardDemo",
     status: "live",
@@ -64,9 +64,9 @@ export const projects: Project[] = [
   },
   {
     id: "crm-viajes",
-    name: "CRM para Agente de Viajes",
+    name: "CRM para agencia de viajes",
     description:
-      "CRM especializado para agentes de viajes: gestión de leads desde múltiples orígenes, comunicación integrada por WhatsApp, email, Facebook e Instagram, seguimiento de estado por potencial, tareas con vencimientos y conversión a cliente. Automatizaciones vía n8n.",
+      "CRM para agentes de viajes: leads desde múltiples canales (WhatsApp, email, redes), seguimiento por estado, tareas con vencimientos y conversión a cliente. La IA redacta las respuestas y prioriza los leads más calientes.",
     tags: ["Next.js", "Supabase", "n8n", "WhatsApp", "TypeScript"],
     demo: "CRMDemo",
     status: "live",
@@ -75,6 +75,26 @@ export const projects: Project[] = [
     featured: true,
     outcome:
       "Unificó 5 canales de captación de leads en una sola bandeja con seguimiento automático.",
+  },
+  {
+    id: "mrbracket-crm",
+    name: "CRM para clínica / consultorio",
+    description:
+      "Seguimiento de pacientes, leads y tratamientos por etapa, con recordatorios y mensajes automáticos. La IA resume las conversaciones de cada paciente y sugiere el próximo paso a dar.",
+    tags: ["Next.js", "Supabase", "IA", "WhatsApp"],
+    status: "live",
+    serviceId: "sistemas",
+    industry: "salud",
+  },
+  {
+    id: "santos-alquileres",
+    name: "Administración de alquileres y contratos",
+    description:
+      "Sistema para inmobiliaria: propiedades, inquilinos, vencimientos y contratos en un solo lugar, con avisos automáticos por WhatsApp. La IA redacta y revisa contratos en segundos.",
+    tags: ["Next.js", "Supabase", "IA", "WhatsApp"],
+    status: "live",
+    serviceId: "sistemas",
+    industry: "servicios",
   },
 
   // ───────────────────────── LANDINGS & SITIOS (con screenshot real)
@@ -334,13 +354,12 @@ export const projects: Project[] = [
   // ───────────────────────── E-COMMERCE / SISTEMAS con demo interactiva
   {
     id: "brideon",
-    name: "BrideOn — Accesorios para Eventos",
+    name: "Tienda online a medida",
     description:
-      "E-commerce de accesorios para bodas, quinceañeras y despedidas. Catálogo con 24 productos, filtros, carrito persistente y pedido personalizado por texto o audio a WhatsApp.",
-    tags: ["React", "TypeScript", "Vite", "Supabase", "WhatsApp"],
-    demo: "BrideonDemo",
+      "E-commerce con catálogo, filtros, carrito persistente y checkout directo a WhatsApp. Los pedidos por texto o audio los interpreta y ordena la IA, sin cargar nada a mano.",
+    tags: ["React", "TypeScript", "Supabase", "IA", "WhatsApp"],
     status: "live",
-    serviceId: "web",
+    serviceId: "sistemas",
     industry: "retail",
   },
   {

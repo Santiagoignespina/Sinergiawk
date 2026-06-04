@@ -1,8 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
 import { projects, industryLabels } from "@/data/projects";
-import BrideonDemo from "@/components/demos/BrideonDemo";
-import StockDemo from "@/components/demos/StockDemo";
 import RecordatorioDemo from "@/components/demos/RecordatorioDemo";
 import CalificacionDemo from "@/components/demos/CalificacionDemo";
 import AusentesDemo from "@/components/demos/AusentesDemo";
@@ -13,8 +11,6 @@ import PacientesProfesionalDemo from "@/components/demos/PacientesProfesionalDem
 import RecopilacionChatsDemo from "@/components/demos/RecopilacionChatsDemo";
 
 const demoMap: Record<string, React.ReactNode> = {
-  BrideonDemo: <BrideonDemo />,
-  StockDemo: <StockDemo />,
   RecordatorioDemo: <RecordatorioDemo />,
   CalificacionDemo: <CalificacionDemo />,
   AusentesDemo: <AusentesDemo />,
@@ -30,9 +26,9 @@ const INITIAL = 6;
 export default function Galeria() {
   const [showAll, setShowAll] = useState(false);
 
-  // Sistemas y automatizaciones: no destacados y sin captura (tienen demo interactiva)
+  // Automatizaciones con IA (n8n) — cada una con demo interactiva
   const items = useMemo(
-    () => projects.filter((p) => !p.featured && !p.previewImage && p.demo),
+    () => projects.filter((p) => p.serviceId === "automatizaciones"),
     []
   );
 
@@ -43,13 +39,13 @@ export default function Galeria() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <p className="text-[#FF4D00] text-sm font-semibold uppercase tracking-widest mb-3">
-            Más allá de las webs
+            Trabajo que se hace solo
           </p>
           <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tight text-white mb-4">
-            Sistemas y automatizaciones
+            Automatizaciones con IA
           </h2>
           <p className="text-white/50 max-w-2xl mx-auto">
-            E-commerce, paneles de gestión y flujos con IA que trabajan solos. Tocá cada tarjeta para ver una demo interactiva.
+            Flujos que corren solos 24/7: recordatorios, reportes y respuestas a clientes con IA. Tocá cada tarjeta para ver una demo interactiva.
           </p>
         </div>
 

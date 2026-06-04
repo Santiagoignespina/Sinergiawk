@@ -53,7 +53,7 @@ export default function Hero() {
             Ver landings
           </a>
           <a
-            href="#casos"
+            href="#sistemas"
             className="border border-white/20 text-white font-semibold px-8 py-3.5 rounded-xl hover:border-[#FF4D00]/50 hover:bg-white/5 transition-all text-base"
           >
             Ver sistemas
