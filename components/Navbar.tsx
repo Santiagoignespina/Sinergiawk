@@ -17,13 +17,14 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
-        <a href="#top" className="font-display font-bold tracking-tight text-white text-lg">
-          santiago ignespina<span className="text-[#FF4D00]">.</span>
+        <a href="#top" className="flex items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo.png" alt="Sinergia" className="h-14 w-auto object-contain" />
         </a>
         <div className="hidden md:flex items-center gap-8 text-sm text-white/70">
-          <a href="#casos" className="hover:text-[#FF4D00] transition-colors">Casos</a>
-          <a href="#proyectos" className="hover:text-[#FF4D00] transition-colors">Trabajos</a>
-          <a href="#servicios" className="hover:text-[#FF4D00] transition-colors">Servicios</a>
+          <a href="#landings" className="hover:text-[#FF4D00] transition-colors">Landings</a>
+          <a href="#casos" className="hover:text-[#FF4D00] transition-colors">Sistemas</a>
+          <a href="#automatizaciones" className="hover:text-[#FF4D00] transition-colors">Automatizaciones</a>
           <a href="#contacto" className="hover:text-[#FF4D00] transition-colors">Contacto</a>
         </div>
         <a

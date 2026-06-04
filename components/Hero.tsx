@@ -41,7 +41,7 @@ export default function Hero() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
-            href="#proyectos"
+            href="#landings"
             className="bg-[#FF4D00] text-white font-semibold px-8 py-3.5 rounded-xl hover:bg-[#ff6a2b] transition-colors text-base"
           >
             Ver mis trabajos
