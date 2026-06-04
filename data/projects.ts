@@ -175,18 +175,6 @@ export const projects: Project[] = [
     previewImage: "/shots/trucos-para-el-truco.jpg",
   },
   {
-    id: "lopez-esposito",
-    name: "López Esposito & Asociados",
-    description:
-      "Landing para estudio jurídico especializado en derecho laboral (Pilar y CABA). Diseño editorial de alto impacto, áreas de práctica y contacto directo para consultas.",
-    tags: ["HTML", "CSS", "Vanilla JS", "SEO"],
-    status: "live",
-    serviceId: "web",
-    industry: "servicios",
-    liveUrl: "https://lopezesposito.com",
-    previewImage: "/shots/lopez-esposito.jpg",
-  },
-  {
     id: "ivo-scurti",
     name: "Ivo Scurti — Asesor Contable",
     description:
@@ -305,6 +293,18 @@ export const projects: Project[] = [
     industry: "deportes",
     liveUrl: "https://multientrenador.com.ar",
     previewImage: "/shots/multientrenador.jpg",
+  },
+  {
+    id: "lopez-esposito",
+    name: "López Esposito & Asociados",
+    description:
+      "Landing para estudio jurídico especializado en derecho laboral (Pilar y CABA). Diseño editorial de alto impacto, áreas de práctica y contacto directo para consultas.",
+    tags: ["HTML", "CSS", "Vanilla JS", "SEO"],
+    status: "live",
+    serviceId: "web",
+    industry: "servicios",
+    liveUrl: "https://lopezesposito.com",
+    previewImage: "/shots/lopez-esposito.jpg",
   },
   {
     id: "canedo-cursos",
