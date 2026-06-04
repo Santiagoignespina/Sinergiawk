@@ -1,5 +1,5 @@
 "use client";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { projects, industryLabels } from "@/data/projects";
 import BrideonDemo from "@/components/demos/BrideonDemo";
 import StockDemo from "@/components/demos/StockDemo";
@@ -25,12 +25,18 @@ const demoMap: Record<string, React.ReactNode> = {
   RecopilacionChatsDemo: <RecopilacionChatsDemo />,
 };
 
+const INITIAL = 6;
+
 export default function Galeria() {
+  const [showAll, setShowAll] = useState(false);
+
   // Sistemas y automatizaciones: no destacados y sin captura (tienen demo interactiva)
   const items = useMemo(
     () => projects.filter((p) => !p.featured && !p.previewImage && p.demo),
     []
   );
+
+  const visible = showAll ? items : items.slice(0, INITIAL);
 
   return (
     <section id="automatizaciones" className="py-24 px-6 bg-[#0A0A0A]">
@@ -48,7 +54,7 @@ export default function Galeria() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {items.map((p) => (
+          {visible.map((p) => (
             <div
               key={p.id}
               className="card-hover bg-[#121212] border border-white/10 rounded-2xl overflow-hidden flex flex-col"
@@ -79,6 +85,17 @@ export default function Galeria() {
             </div>
           ))}
         </div>
+
+        {items.length > INITIAL && (
+          <div className="text-center mt-10">
+            <button
+              onClick={() => setShowAll((v) => !v)}
+              className="border border-white/20 text-white font-semibold px-8 py-3 rounded-xl hover:border-[#FF4D00]/50 hover:bg-white/5 transition-all"
+            >
+              {showAll ? "Ver menos" : `Ver todo (${items.length})`}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

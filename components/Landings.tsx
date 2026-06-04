@@ -5,9 +5,11 @@ import { projects, industryLabels, type Industry } from "@/data/projects";
 type FilterValue = "todos" | Industry;
 
 const isVercel = (url?: string) => !!url && url.includes("vercel.app");
+const INITIAL = 6;
 
 export default function Landings() {
   const [filter, setFilter] = useState<FilterValue>("todos");
+  const [showAll, setShowAll] = useState(false);
 
   // Solo landings con captura; dominio propio (.com.ar/.com) primero, luego .vercel.app
   const landings = useMemo(
@@ -29,6 +31,13 @@ export default function Landings() {
     return landings.filter((p) => p.industry === filter);
   }, [filter, landings]);
 
+  const handleFilter = (value: FilterValue) => {
+    setFilter(value);
+    setShowAll(false);
+  };
+
+  const visible = showAll ? filtered : filtered.slice(0, INITIAL);
+
   return (
     <section id="landings" className="py-24 px-6 bg-[#0A0A0A]">
       <div className="max-w-6xl mx-auto">
@@ -45,13 +54,13 @@ export default function Landings() {
         </div>
 
         <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
-          <FilterChip active={filter === "todos"} onClick={() => setFilter("todos")}>
+          <FilterChip active={filter === "todos"} onClick={() => handleFilter("todos")}>
             Todas · {landings.length}
           </FilterChip>
           {availableIndustries.map((ind) => {
             const count = landings.filter((p) => p.industry === ind).length;
             return (
-              <FilterChip key={ind} active={filter === ind} onClick={() => setFilter(ind)}>
+              <FilterChip key={ind} active={filter === ind} onClick={() => handleFilter(ind)}>
                 {industryLabels[ind]} · {count}
               </FilterChip>
             );
@@ -59,7 +68,7 @@ export default function Landings() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {filtered.map((p) => (
+          {visible.map((p) => (
             <a
               key={p.id}
               href={p.liveUrl}
@@ -104,6 +113,17 @@ export default function Landings() {
             </a>
           ))}
         </div>
+
+        {filtered.length > INITIAL && (
+          <div className="text-center mt-10">
+            <button
+              onClick={() => setShowAll((v) => !v)}
+              className="border border-white/20 text-white font-semibold px-8 py-3 rounded-xl hover:border-[#FF4D00]/50 hover:bg-white/5 transition-all"
+            >
+              {showAll ? "Ver menos" : `Ver todas las landings (${filtered.length})`}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
