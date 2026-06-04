@@ -115,18 +115,6 @@ export const projects: Project[] = [
     previewImage: "/shots/food-trucks-triple-c.jpg",
   },
   {
-    id: "multientrenador",
-    name: "Multientrenador — Personal Trainer",
-    description:
-      "Landing para personal trainer con el método MULTITASK y el grupo Las Spartans. Hero con mockup animado, quién soy, propuesta de entrenamiento y ubicación. CTA directo a WhatsApp.",
-    tags: ["React", "Vite", "Tailwind v4", "WhatsApp"],
-    status: "live",
-    serviceId: "web",
-    industry: "deportes",
-    liveUrl: "https://multientrenador.com.ar",
-    previewImage: "/shots/multientrenador.jpg",
-  },
-  {
     id: "ccv",
     name: "Campeonato Cordobés de Velocidad",
     description:
@@ -305,6 +293,18 @@ export const projects: Project[] = [
     industry: "automotor",
     liveUrl: "https://sacabolloscanedo.com",
     previewImage: "/shots/canedo-sacabollos.jpg",
+  },
+  {
+    id: "multientrenador",
+    name: "Multientrenador — Personal Trainer",
+    description:
+      "Landing para personal trainer con el método MULTITASK y el grupo Las Spartans. Hero con mockup animado, quién soy, propuesta de entrenamiento y ubicación. CTA directo a WhatsApp.",
+    tags: ["React", "Vite", "Tailwind v4", "WhatsApp"],
+    status: "live",
+    serviceId: "web",
+    industry: "deportes",
+    liveUrl: "https://multientrenador.com.ar",
+    previewImage: "/shots/multientrenador.jpg",
   },
   {
     id: "canedo-cursos",
