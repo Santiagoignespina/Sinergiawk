@@ -106,8 +106,8 @@ export default function AudioRecorder({ onAudioReady }: AudioRecorderProps) {
       )}
 
       {state === "done" ? (
-        <div className="flex flex-col items-center gap-3 w-full bg-[#00C8E8]/5 rounded-xl p-4 border border-[#00C8E8]/20">
-          <div className="flex items-center gap-2 text-[#00C8E8] text-sm font-semibold">
+        <div className="flex flex-col items-center gap-3 w-full bg-[#FF4D00]/5 rounded-xl p-4 border border-[#FF4D00]/20">
+          <div className="flex items-center gap-2 text-[#FF4D00] text-sm font-semibold">
             <span>✓</span>
             <span>Audio grabado ({formatTime(seconds)})</span>
           </div>
@@ -137,7 +137,7 @@ export default function AudioRecorder({ onAudioReady }: AudioRecorderProps) {
                 ? "bg-red-500/20 ring-2 ring-red-400 ring-offset-2 ring-offset-transparent"
                 : state === "paused"
                 ? "bg-yellow-500/20 ring-2 ring-yellow-400 ring-offset-2 ring-offset-transparent"
-                : "bg-[#00C8E8]/10 hover:bg-[#00C8E8]/20 border border-[#00C8E8]/30"
+                : "bg-[#FF4D00]/10 hover:bg-[#FF4D00]/20 border border-[#FF4D00]/30"
             }`}
           >
             {state === "recording" ? (
@@ -156,7 +156,7 @@ export default function AudioRecorder({ onAudioReady }: AudioRecorderProps) {
               </svg>
             ) : (
               /* Micrófono */
-              <svg className="w-8 h-8 text-[#00C8E8]" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-8 h-8 text-[#FF4D00]" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 1a4 4 0 0 1 4 4v7a4 4 0 0 1-8 0V5a4 4 0 0 1 4-4zm0 2a2 2 0 0 0-2 2v7a2 2 0 0 0 4 0V5a2 2 0 0 0-2-2zm-7 9a7 7 0 0 0 14 0h2a9 9 0 0 1-8 8.94V23h-2v-2.06A9 9 0 0 1 3 12h2z" />
               </svg>
             )}
@@ -186,7 +186,7 @@ export default function AudioRecorder({ onAudioReady }: AudioRecorderProps) {
             <button
               type="button"
               onClick={finishRecording}
-              className="flex items-center gap-2 bg-[#00C8E8]/15 hover:bg-[#00C8E8]/25 border border-[#00C8E8]/40 text-[#00C8E8] font-semibold text-sm px-5 py-2 rounded-xl transition-colors"
+              className="flex items-center gap-2 bg-[#FF4D00]/15 hover:bg-[#FF4D00]/25 border border-[#FF4D00]/40 text-[#FF4D00] font-semibold text-sm px-5 py-2 rounded-xl transition-colors"
             >
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <rect x="5" y="5" width="14" height="14" rx="2" />
