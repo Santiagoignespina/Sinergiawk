@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import QueEsLanding from "@/components/QueEsLanding";
 import Landings from "@/components/Landings";
 import CaseStudies from "@/components/CaseStudies";
 import Galeria from "@/components/Galeria";
@@ -11,6 +12,7 @@ export default function Home() {
     <main>
       <Navbar />
       <Hero />
+      <QueEsLanding />
       <Landings />
       <CaseStudies />
       <Galeria />
