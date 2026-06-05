@@ -82,6 +82,7 @@ export const projects: Project[] = [
     description:
       "Seguimiento de pacientes, leads y tratamientos por etapa, con recordatorios y mensajes automáticos. La IA resume las conversaciones de cada paciente y sugiere el próximo paso a dar.",
     tags: ["Next.js", "Supabase", "IA", "WhatsApp"],
+    demo: "CRMClinicaDemo",
     status: "live",
     serviceId: "sistemas",
     industry: "salud",
@@ -92,6 +93,7 @@ export const projects: Project[] = [
     description:
       "Sistema para inmobiliaria: propiedades, inquilinos, vencimientos y contratos en un solo lugar, con avisos automáticos por WhatsApp. La IA redacta y revisa contratos en segundos.",
     tags: ["Next.js", "Supabase", "IA", "WhatsApp"],
+    demo: "AlquileresDemo",
     status: "live",
     serviceId: "sistemas",
     industry: "servicios",
@@ -358,6 +360,7 @@ export const projects: Project[] = [
     description:
       "E-commerce con catálogo, filtros, carrito persistente y checkout directo a WhatsApp. Los pedidos por texto o audio los interpreta y ordena la IA, sin cargar nada a mano.",
     tags: ["React", "TypeScript", "Supabase", "IA", "WhatsApp"],
+    demo: "BrideonDemo",
     status: "live",
     serviceId: "sistemas",
     industry: "retail",

@@ -117,7 +117,7 @@ export default function RecopilacionChatsDemo() {
           </div>
 
           <div className="px-3 py-1 border-t flex justify-between shrink-0" style={{ borderColor:"#2e2e2e", background:"#141414" }}>
-            <span style={{ fontSize:6, color:"#ffffff30" }}>Webhook activo · POST /Mr.Bracket</span>
+            <span style={{ fontSize:6, color:"#ffffff30" }}>Webhook activo · POST /clinica</span>
             <span style={{ fontSize:6, color:"#3ecf8e" }}>+3 mensajes hoy</span>
           </div>
         </div>

@@ -29,8 +29,7 @@ export default function TurneroDemo() {
       {/* ── KIOSK ── */}
       {screen === "Kiosk" && (
         <div className="flex-1 flex flex-col items-center justify-center" style={{backgroundColor: GREEN}}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo-mrbracket.png" alt="" width={52} height={52} className="object-contain mb-2" style={{filter:"brightness(0) invert(1)"}} />
+          <div className="w-12 h-12 rounded-2xl bg-white/25 flex items-center justify-center text-white font-bold mb-2" style={{fontSize:24}}>+</div>
 
           {kioskStep === "bienvenida" && (
             <>
@@ -128,8 +127,7 @@ export default function TurneroDemo() {
       {screen === "Pantalla TV" && (
         <div className="flex-1 flex flex-col overflow-hidden">
           <div className="flex items-center justify-between px-3 py-2 shrink-0" style={{backgroundColor: GREEN}}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/logo-mrbracket.png" alt="" width={28} height={28} className="object-contain" style={{filter:"brightness(0) invert(1)"}} />
+            <div className="w-7 h-7 rounded-lg bg-white/25 flex items-center justify-center text-white font-bold" style={{fontSize:14}}>+</div>
             <div className="text-right">
               <div className="text-white font-bold" style={{fontSize:16}}>22:43</div>
               <div className="text-white/80" style={{fontSize:7}}>Jueves 26 de marzo de 2026</div>
@@ -163,7 +161,7 @@ export default function TurneroDemo() {
               <div className="text-white/70" style={{fontSize:7}}>Panel del profesional</div>
               <div className="text-white font-bold" style={{fontSize:12}}>Consultorio 1</div>
             </div>
-            <div className="bg-white rounded-full px-2 py-1 font-semibold" style={{fontSize:8, color: GREEN}}>👤 Anayansi Medina</div>
+            <div className="bg-white rounded-full px-2 py-1 font-semibold" style={{fontSize:8, color: GREEN}}>👤 Dra. Romero</div>
             <span className="text-white/70 underline" style={{fontSize:7}}>← Recepción</span>
           </div>
           <div className="flex-1 p-2 flex flex-col gap-2 overflow-hidden">

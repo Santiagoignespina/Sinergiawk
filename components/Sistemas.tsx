@@ -1,18 +1,24 @@
 "use client";
 import { useMemo, useState } from "react";
 import { projects } from "@/data/projects";
-import SystemMock from "@/components/SystemMock";
+import DashboardDemo from "@/components/demos/DashboardDemo";
+import TurneroDemo from "@/components/demos/TurneroDemo";
+import CRMDemo from "@/components/demos/CRMDemo";
+import StockDemo from "@/components/demos/StockDemo";
+import BrideonDemo from "@/components/demos/BrideonDemo";
+import CRMClinicaDemo from "@/components/demos/CRMClinicaDemo";
+import AlquileresDemo from "@/components/demos/AlquileresDemo";
 
 const INITIAL = 6;
 
-const mockVariant: Record<string, string> = {
-  mrbracket: "chart",
-  "mrbracket-crm": "kanban",
-  "santos-alquileres": "table",
-  "crm-viajes": "kanban",
-  turnero: "table",
-  stock: "table",
-  brideon: "grid",
+const demoMap: Record<string, React.ReactNode> = {
+  DashboardDemo: <DashboardDemo />,
+  TurneroDemo: <TurneroDemo />,
+  CRMDemo: <CRMDemo />,
+  StockDemo: <StockDemo />,
+  BrideonDemo: <BrideonDemo />,
+  CRMClinicaDemo: <CRMClinicaDemo />,
+  AlquileresDemo: <AlquileresDemo />,
 };
 
 export default function Sistemas() {
@@ -38,7 +44,7 @@ export default function Sistemas() {
           <p className="text-white/55 max-w-2xl mx-auto text-lg leading-relaxed">
             No solo programo el sistema que tu negocio necesita: le sumo inteligencia artificial
             puesta a <span className="text-white font-semibold">trabajar</span> — que redacte, resuma,
-            responda y avise sola. Estos son algunos ejemplos reales.
+            responda y avise sola. Tocá cada tarjeta para verlos funcionando.
           </p>
         </div>
 
@@ -48,8 +54,8 @@ export default function Sistemas() {
               key={p.id}
               className="card-hover bg-[#121212] border border-white/10 rounded-2xl overflow-hidden flex flex-col"
             >
-              <div className="h-44 border-b border-white/10 overflow-hidden">
-                <SystemMock variant={mockVariant[p.id] || "chart"} />
+              <div className="h-52 border-b border-white/10 bg-[#0A0A0A] p-2 overflow-hidden">
+                {p.demo ? demoMap[p.demo] : null}
               </div>
 
               <div className="p-5 flex flex-col flex-1">

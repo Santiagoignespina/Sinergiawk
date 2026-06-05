@@ -1,6 +1,5 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
 
 const tabs = ["Ventas", "Pacientes", "Profesionales", "Ranking"] as const;
 type Tab = (typeof tabs)[number];
@@ -27,9 +26,7 @@ export default function DashboardDemo() {
     <div className="w-full h-full flex overflow-hidden rounded-xl select-none bg-white" style={{fontSize: 9}}>
       {/* Sidebar */}
       <div className="w-[72px] bg-gradient-to-b from-[#22c55e] to-[#16a34a] flex flex-col items-center py-2 gap-0.5 shrink-0">
-        <div className="mb-1">
-          <Image src="/logo-mrbracket.png" alt="" width={32} height={32} className="object-contain" />
-        </div>
+        <div className="mb-1 w-8 h-8 rounded-lg bg-white/25 flex items-center justify-center text-white font-bold" style={{fontSize:14}}>+</div>
         <div className="text-white/70 text-[7px] font-semibold mb-1">Dashboard</div>
         {tabs.map((t) => (
           <button key={t} onClick={() => setActive(t)}
@@ -88,7 +85,7 @@ export default function DashboardDemo() {
                     <th className="px-2 py-1 text-right font-medium">Pac.</th>
                   </tr></thead>
                   <tbody style={{fontSize:8}}>
-                    {[["26/03","boatti","2.161.400",47],["26/03","san-martin","927.700",17]].map(([d,s,f,p]) => (
+                    {[["26/03","centro","2.161.400",47],["26/03","norte","927.700",17]].map(([d,s,f,p]) => (
                       <tr key={String(s)} className="border-b border-gray-50">
                         <td className="px-2 py-1 text-gray-400">{d}</td>
                         <td className="px-2 py-1 text-gray-700 font-medium">{s}</td>
@@ -139,10 +136,10 @@ export default function DashboardDemo() {
                   </tr></thead>
                   <tbody style={{fontSize:7.5}}>
                     {[
-                      ["02/03","Nicolas Cisternas","47229525","Bracket Metálico","$3.000"],
-                      ["02/03","Pabla Candia","40590857","Arco Niti","$4.000"],
-                      ["02/03","Luana Quiroga","39876523","Cancelación deuda","$2.000"],
-                      ["02/03","Adriana Tolosa","42067620","Arco Niti, Tubo","$12.000"],
+                      ["02/03","Juan Pérez","30111222","Bracket Metálico","$3.000"],
+                      ["02/03","María López","31222333","Arco Niti","$4.000"],
+                      ["02/03","Lucía Gómez","29333444","Cancelación deuda","$2.000"],
+                      ["02/03","Diego Ruiz","32444555","Arco Niti, Tubo","$12.000"],
                     ].map(([d,p,dni,e,m]) => (
                       <tr key={dni+e} className="border-b border-gray-50">
                         <td className="px-1.5 py-0.5 text-gray-400">{d}</td>
@@ -186,11 +183,11 @@ export default function DashboardDemo() {
                   </tr></thead>
                   <tbody style={{fontSize:7.5}}>
                     {[
-                      ["13/03","Maria Jose Ortiz","PROMO control metálico","6000"],
-                      ["13/03","Liseaneth Abreu","RX Panorámica","900"],
-                      ["13/03","Elizabeth Garcia","Control metálicos","6000"],
-                      ["13/03","Jessenia Palacios","Control metálicos","6000"],
-                      ["13/03","Geraldine Waigel","PROMO control metálico","6000"],
+                      ["13/03","Dra. Romero","PROMO control metálico","6000"],
+                      ["13/03","Dr. Suárez","RX Panorámica","900"],
+                      ["13/03","Dra. Ferreyra","Control metálicos","6000"],
+                      ["13/03","Dr. Molina","Control metálicos","6000"],
+                      ["13/03","Dra. Castro","PROMO control metálico","6000"],
                     ].map(([f,p,e,c]) => (
                       <tr key={p+e} className="border-b border-gray-50">
                         <td className="px-2 py-0.5 text-gray-400">{f}</td>
@@ -216,20 +213,20 @@ export default function DashboardDemo() {
               {/* Podio */}
               <div className="flex items-end justify-center gap-2 px-2">
                 <div className="flex flex-col items-center gap-1">
-                  <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-[7px] font-bold text-gray-500 border-2 border-gray-300">MB</div>
-                  <div className="text-gray-600 font-semibold text-center" style={{fontSize:7}}>Morelia Porro</div>
+                  <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-[7px] font-bold text-gray-500 border-2 border-gray-300">DR</div>
+                  <div className="text-gray-600 font-semibold text-center" style={{fontSize:7}}>Dra. Romero</div>
                   <div className="text-green-600 font-bold" style={{fontSize:8}}>847.600</div>
                   <div className="w-10 h-7 bg-gray-300 rounded-t flex items-center justify-center text-white font-bold" style={{fontSize:9}}>2°</div>
                 </div>
                 <div className="flex flex-col items-center gap-1">
-                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-[7px] font-bold text-green-700 border-2 border-green-400">EG</div>
-                  <div className="text-gray-700 font-semibold text-center" style={{fontSize:7}}>Elizabeth Garcia</div>
+                  <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-[7px] font-bold text-green-700 border-2 border-green-400">DF</div>
+                  <div className="text-gray-700 font-semibold text-center" style={{fontSize:7}}>Dra. Ferreyra</div>
                   <div className="text-green-600 font-bold" style={{fontSize:9}}>1.192.500</div>
                   <div className="w-10 h-10 bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-t flex items-center justify-center text-white font-bold" style={{fontSize:10}}>1°</div>
                 </div>
                 <div className="flex flex-col items-center gap-1">
-                  <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-[7px] font-bold text-orange-600 border-2 border-orange-300">GW</div>
-                  <div className="text-gray-600 font-semibold text-center" style={{fontSize:7}}>Geraldine Waigel</div>
+                  <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-[7px] font-bold text-orange-600 border-2 border-orange-300">DC</div>
+                  <div className="text-gray-600 font-semibold text-center" style={{fontSize:7}}>Dra. Castro</div>
                   <div className="text-green-600 font-bold" style={{fontSize:8}}>829.000</div>
                   <div className="w-10 h-6 bg-gradient-to-b from-orange-400 to-orange-600 rounded-t flex items-center justify-center text-white font-bold" style={{fontSize:9}}>3°</div>
                 </div>
@@ -244,10 +241,10 @@ export default function DashboardDemo() {
                   </tr></thead>
                   <tbody style={{fontSize:7.5}}>
                     {[
-                      [4,"Maria Jose Ortiz","665.500","7%"],
-                      [5,"Nathaly nn","554.000","6%"],
-                      [6,"Greicela Pineda","498.000","6%"],
-                      [7,"Anya Serrano","443.000","5%"],
+                      [4,"Dr. Suárez","665.500","7%"],
+                      [5,"Dr. Molina","554.000","6%"],
+                      [6,"Dra. Vega","498.000","6%"],
+                      [7,"Dr. Peña","443.000","5%"],
                     ].map(([n,p,c,pct]) => (
                       <tr key={String(n)} className="border-b border-gray-50">
                         <td className="px-2 py-0.5 text-gray-400">{n}</td>
