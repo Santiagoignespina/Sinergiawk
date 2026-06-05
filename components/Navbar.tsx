@@ -31,7 +31,7 @@ export default function Navbar() {
           href="#contacto"
           className="text-sm bg-[#FF4D00] text-white font-semibold px-4 py-2 rounded-lg hover:bg-[#ff6a2b] transition-colors"
         >
-          Hablemos
+          Escribinos
         </a>
       </div>
     </nav>

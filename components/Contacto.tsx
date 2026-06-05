@@ -7,7 +7,7 @@ type InputMode = "text" | "audio";
 const N8N_WEBHOOK_URL = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || "";
 
 export default function Contacto() {
-  const [form, setForm] = useState({ nombre: "", email: "", celular: "", mensaje: "", audio: null as Blob | null });
+  const [form, setForm] = useState({ nombre: "", celular: "", mensaje: "", audio: null as Blob | null });
   const [inputMode, setInputMode] = useState<InputMode>("text");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -17,8 +17,8 @@ export default function Contacto() {
     e.preventDefault();
     setError(null);
 
-    if (!form.nombre.trim() || !form.email.trim()) {
-      setError("Completá nombre y email.");
+    if (!form.nombre.trim()) {
+      setError("Completá tu nombre.");
       return;
     }
     if (inputMode === "text" && !form.mensaje.trim()) {
@@ -40,7 +40,6 @@ export default function Contacto() {
 
       const payload = {
         nombre: form.nombre,
-        email: form.email,
         celular: form.celular,
         tipo: inputMode,
         mensaje: inputMode === "text" ? form.mensaje : null,
@@ -101,28 +100,16 @@ export default function Contacto() {
           onSubmit={handleSubmit}
           className="bg-[#121212]/80 backdrop-blur-sm border border-white/10 rounded-2xl p-8 flex flex-col gap-5"
         >
-          {/* Nombre + Email */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="flex flex-col gap-1.5">
-              <label className="text-white/60 text-sm">Nombre *</label>
-              <input
-                type="text"
-                placeholder="Santiago"
-                value={form.nombre}
-                onChange={(e) => setForm({ ...form, nombre: e.target.value })}
-                className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#FF4D00]/50 transition-colors"
-              />
-            </div>
-            <div className="flex flex-col gap-1.5">
-              <label className="text-white/60 text-sm">Email *</label>
-              <input
-                type="email"
-                placeholder="vos@email.com"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#FF4D00]/50 transition-colors"
-              />
-            </div>
+          {/* Nombre */}
+          <div className="flex flex-col gap-1.5">
+            <label className="text-white/60 text-sm">Nombre *</label>
+            <input
+              type="text"
+              placeholder="Santiago"
+              value={form.nombre}
+              onChange={(e) => setForm({ ...form, nombre: e.target.value })}
+              className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#FF4D00]/50 transition-colors"
+            />
           </div>
 
           {/* Celular */}
