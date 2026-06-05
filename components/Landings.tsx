@@ -15,7 +15,7 @@ export default function Landings() {
   const landings = useMemo(
     () =>
       projects
-        .filter((p) => p.previewImage)
+        .filter((p) => p.previewImage && p.serviceId === "web")
         .sort((a, b) => Number(isVercel(a.liveUrl)) - Number(isVercel(b.liveUrl))),
     []
   );

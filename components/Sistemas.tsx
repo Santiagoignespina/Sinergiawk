@@ -24,10 +24,12 @@ const demoMap: Record<string, React.ReactNode> = {
 export default function Sistemas() {
   const [showAll, setShowAll] = useState(false);
 
-  const sistemas = useMemo(
-    () => projects.filter((p) => p.serviceId === "sistemas"),
-    []
-  );
+  const sistemas = useMemo(() => {
+    const order = ["mrbracket", "turnero", "stock", "mrbracket-crm", "santos-alquileres", "brideon", "crm-viajes"];
+    return projects
+      .filter((p) => p.serviceId === "sistemas")
+      .sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+  }, []);
 
   const visible = showAll ? sistemas : sistemas.slice(0, INITIAL);
 
@@ -54,8 +56,18 @@ export default function Sistemas() {
               key={p.id}
               className="card-hover bg-[#121212] border border-white/10 rounded-2xl overflow-hidden flex flex-col"
             >
-              <div className="h-52 border-b border-white/10 bg-[#0A0A0A] p-2 overflow-hidden">
-                {p.demo ? demoMap[p.demo] : null}
+              <div className="h-52 border-b border-white/10 bg-[#0A0A0A] overflow-hidden">
+                {p.previewImage ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={p.previewImage}
+                    alt={`Captura de ${p.name}`}
+                    loading="lazy"
+                    className="w-full h-full object-cover object-top"
+                  />
+                ) : (
+                  <div className="w-full h-full p-2">{p.demo ? demoMap[p.demo] : null}</div>
+                )}
               </div>
 
               <div className="p-5 flex flex-col flex-1">
