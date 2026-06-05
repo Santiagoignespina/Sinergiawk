@@ -6,6 +6,7 @@ import Sistemas from "@/components/Sistemas";
 import Galeria from "@/components/Galeria";
 import Servicios from "@/components/Servicios";
 import Contacto from "@/components/Contacto";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <footer className="border-t border-white/10 py-6 text-center text-white/30 text-sm">
         © {new Date().getFullYear()} Santiago Ignespina · Desarrollo web a medida
       </footer>
+      <WhatsAppFloat />
     </main>
   );
 }
