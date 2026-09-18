@@ -53,8 +53,7 @@
 
 ## Pendientes / deuda conocida
 - **`N8N_WEBHOOK_URL` falta en el entorno Preview de Vercel** (Production y Development ya están). Los deploys de preview van a responder 500 en el formulario hasta cargarla.
-- **Borrar `NEXT_PUBLIC_N8N_WEBHOOK_URL` de Vercel** una vez deployado el código nuevo. Mientras siga ahí, la URL del webhook sigue expuesta en los bundles viejos.
-- **El código nuevo todavía no está deployado**: producción sigue sirviendo la versión de junio, con el bug del audio. Hay dos commits locales sin pushear ni deployar.
+- **`NEXT_PUBLIC_N8N_WEBHOOK_URL` sigue cargada en Vercel.** Ya no la usa ningún código y el deploy actual no la expone (verificado: el host no aparece ni en el HTML ni en los chunks). Se puede borrar, pero **ojo**: si se borra, un rollback al deploy anterior deja el formulario sin webhook.
 - **lse.com.ar está roto y por eso quedó afuera del portfolio**: el dominio resuelve al hosting viejo (DonWeb/Ferozo) y sirve "Su sitio web no posee certificado SSL" en lugar del sitio, que sí está bien deployado en Vercel. Hay que corregir los registros DNS del dominio.
 - Sin rate limit en `/api/contacto`. Hay honeypot y validación, pero un bot dedicado igual puede spamear.
 - Las demos de automatizaciones (`components/demos/`) todavía muestran nombres de pacientes y "/Mr.Bracket" en algunas pantallas — pendiente genericizar.
@@ -66,4 +65,4 @@
 - 2026-09-17 — análisis + fixes en esta sesión (bug de audio, webhook privado, next/image, dominio unificado, código muerto) y renovación del portfolio. No se corrió `/auditar` completo; no existe `AUDITORIA.md`.
 
 ## Smoke test del formulario
-- 2026-09-17, contra el dev server con el webhook real: camino texto y camino audio, los dos llegaron a n8n y devolvieron 200. Validaciones del route handler probadas una por una (honeypot, campos faltantes, JSON inválido, audio >3MB). **Falta repetirlo sobre la URL de producción después del deploy.**
+- 2026-09-17, contra el dev server con el webhook real: camino texto y camino audio, los dos llegaron a n8n y devolvieron 200. Validaciones del route handler probadas una por una (honeypot, campos faltantes, JSON inválido, audio >3MB). Repetido el mismo día sobre https://www.sinergiawk.com ya deployado: texto en desktop y audio en mobile, los dos 200 y con la pantalla de éxito; la validación de celular vacío frena el envío en ambos.
