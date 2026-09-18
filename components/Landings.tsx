@@ -6,18 +6,36 @@ import { projects, industryLabels, type Industry } from "@/data/projects";
 type FilterValue = "todos" | Industry;
 
 const isVercel = (url?: string) => !!url && url.includes("vercel.app");
+
+// Las mas nuevas van adelante: son las que mejor muestran el trabajo actual.
+const DESTACADAS = [
+  "alpie",
+  "asppe",
+  "fremli",
+  "dra-mercedes-bustamante",
+  "rcr-soluciones",
+];
+
+// Orden: destacadas primero (en este orden), despues el resto con dominio
+// propio, y al final las que todavia estan en .vercel.app.
+const rank = (p: { id: string; liveUrl?: string }) => {
+  const destacada = DESTACADAS.indexOf(p.id);
+  if (destacada !== -1) return destacada;
+  return DESTACADAS.length + (isVercel(p.liveUrl) ? 1 : 0);
+};
+
 const INITIAL = 6;
 
 export default function Landings() {
   const [filter, setFilter] = useState<FilterValue>("todos");
   const [showAll, setShowAll] = useState(false);
 
-  // Solo landings con captura; dominio propio (.com.ar/.com) primero, luego .vercel.app
+  // Solo landings con captura, ordenadas segun rank()
   const landings = useMemo(
     () =>
       projects
         .filter((p) => p.previewImage && p.serviceId === "web")
-        .sort((a, b) => Number(isVercel(a.liveUrl)) - Number(isVercel(b.liveUrl))),
+        .sort((a, b) => rank(a) - rank(b)),
     []
   );
 
