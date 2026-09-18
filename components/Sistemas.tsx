@@ -6,7 +6,7 @@ import DashboardDemo from "@/components/demos/DashboardDemo";
 import TurneroDemo from "@/components/demos/TurneroDemo";
 import CRMDemo from "@/components/demos/CRMDemo";
 import StockDemo from "@/components/demos/StockDemo";
-import BrideonDemo from "@/components/demos/BrideonDemo";
+import MgaDemo from "@/components/demos/MgaDemo";
 import CRMClinicaDemo from "@/components/demos/CRMClinicaDemo";
 import AlquileresDemo from "@/components/demos/AlquileresDemo";
 
@@ -17,7 +17,7 @@ const demoMap: Record<string, React.ReactNode> = {
   TurneroDemo: <TurneroDemo />,
   CRMDemo: <CRMDemo />,
   StockDemo: <StockDemo />,
-  BrideonDemo: <BrideonDemo />,
+  MgaDemo: <MgaDemo />,
   CRMClinicaDemo: <CRMClinicaDemo />,
   AlquileresDemo: <AlquileresDemo />,
 };
@@ -26,7 +26,7 @@ export default function Sistemas() {
   const [showAll, setShowAll] = useState(false);
 
   const sistemas = useMemo(() => {
-    const order = ["mrbracket", "turnero", "stock", "mrbracket-crm", "santos-alquileres", "brideon", "crm-viajes"];
+    const order = ["mrbracket", "mga-flex", "turnero", "stock", "mrbracket-crm", "santos-alquileres", "crm-viajes"];
     return projects
       .filter((p) => p.serviceId === "sistemas")
       .sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));

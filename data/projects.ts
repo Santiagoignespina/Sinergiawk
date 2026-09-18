@@ -5,7 +5,8 @@ export type Industry =
   | "automotor"
   | "deportes"
   | "educacion"
-  | "servicios";
+  | "servicios"
+  | "logistica";
 
 export type Project = {
   id: string;
@@ -30,6 +31,7 @@ export const industryLabels: Record<Industry, string> = {
   deportes: "Deportes",
   educacion: "Educación",
   servicios: "Servicios profesionales",
+  logistica: "Logística",
 };
 
 export const projects: Project[] = [
@@ -61,6 +63,20 @@ export const projects: Project[] = [
     featured: true,
     outcome:
       "Eliminó la gestión manual de turnos: kiosco, recepción, consultorios y TV sincronizados.",
+  },
+  {
+    id: "mga-flex",
+    name: "Seguimiento de paquetes para logística",
+    description:
+      "Cada repartidor escanea el paquete con el celular y queda registrado el estado, la hora y dónde estaba. El panel muestra en qué anda cada envío, el cliente final lo sigue por un link y la liquidación por zona sale sola.",
+    tags: ["Next.js", "Supabase", "Escáner", "GPS"],
+    demo: "MgaDemo",
+    status: "live",
+    serviceId: "sistemas",
+    industry: "logistica",
+    featured: true,
+    outcome:
+      "Reemplazó el seguimiento por WhatsApp y papel: los repartidores escanean en la calle y cada paquete queda con hora, estado y ubicación.",
   },
   {
     id: "crm-viajes",
@@ -526,17 +542,6 @@ export const projects: Project[] = [
   },
 
   // ───────────────────────── E-COMMERCE / SISTEMAS con demo interactiva
-  {
-    id: "brideon",
-    name: "Tienda online a medida",
-    description:
-      "E-commerce con catálogo, filtros, carrito persistente y checkout directo a WhatsApp. Los pedidos por texto o audio los interpreta y ordena la IA, sin cargar nada a mano.",
-    tags: ["React", "TypeScript", "Supabase", "IA", "WhatsApp"],
-    demo: "BrideonDemo",
-    status: "live",
-    serviceId: "sistemas",
-    industry: "retail",
-  },
   {
     id: "stock",
     name: "Sistema de Stock Distribuido",
