@@ -14,25 +14,25 @@ const MODOS = [
   { id: "ausente", label: "No estaba", color: "#d97706" },
 ] as const;
 
-const CODIGOS = ["44011253980", "44011254102", "44011254337", "44011254588"];
+const CODIGOS = ["10023456781", "10023456782", "10023456783", "10023456784"];
 
 type Escaneo = { codigo: string; modo: string; color: string; hora: string };
 
 const ESCANEOS_INICIALES: Escaneo[] = [
-  { codigo: "44011253844", modo: "Entregado", color: "#16a34a", hora: "14:32" },
-  { codigo: "44011253791", modo: "No estaba", color: "#d97706", hora: "14:18" },
+  { codigo: "10023456779", modo: "Entregado", color: "#16a34a", hora: "14:32" },
+  { codigo: "10023456778", modo: "No estaba", color: "#d97706", hora: "14:18" },
 ];
 
 const PAQUETES = [
-  { id: "44011254102", destino: "Av. Rivadavia 8420", barrio: "Flores", metros: 420 },
-  { id: "44011254337", destino: "Yerbal 2255", barrio: "Flores", metros: 1100 },
-  { id: "44011254588", destino: "Bacacay 3510", barrio: "Floresta", metros: 2300 },
+  { id: "10023456782", destino: "Av. Mitre 1240", barrio: "Centro", metros: 420 },
+  { id: "10023456783", destino: "San Lorenzo 880", barrio: "Centro", metros: 1100 },
+  { id: "10023456784", destino: "Belgrano 2150", barrio: "Norte", metros: 2300 },
 ];
 
 const TIMELINE = [
-  { estado: "Ingresado al depósito", hora: "Hoy 09:12", quien: "MGA Servicios", ok: true },
-  { estado: "En camino con el repartidor", hora: "Hoy 13:40", quien: "Alejo", ok: true },
-  { estado: "Entregado", hora: "Hoy 14:32", quien: "Alejo · Av. Rivadavia 8420", ok: true },
+  { estado: "Ingresado al depósito", hora: "Hoy 09:12", quien: "Depósito", ok: true },
+  { estado: "En camino con el repartidor", hora: "Hoy 13:40", quien: "Martín", ok: true },
+  { estado: "Entregado", hora: "Hoy 14:32", quien: "Martín · Av. Mitre 1240", ok: true },
 ];
 
 export default function MgaDemo() {
@@ -56,7 +56,7 @@ export default function MgaDemo() {
       <div className="flex items-center justify-between px-3 py-1.5 shrink-0 text-white" style={{ background: NAVY }}>
         <div className="font-bold flex items-center gap-1" style={{ fontSize: 11 }}>
           <span>🚚</span>
-          <span>MGA Flex</span>
+          <span>Logística</span>
         </div>
         <div className="flex gap-1">
           {pantallas.map((p) => (
@@ -189,7 +189,7 @@ export default function MgaDemo() {
               PAQUETE
             </div>
             <div className="font-mono text-gray-800" style={{ fontSize: 9 }}>
-              44011253844
+              10023456779
             </div>
           </div>
 
