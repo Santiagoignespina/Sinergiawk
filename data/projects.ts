@@ -127,18 +127,6 @@ export const projects: Project[] = [
     previewImage: "/shots/santos-propiedades.jpg",
   },
   {
-    id: "cfstore",
-    name: "CF Store Cali — Sneakers",
-    description:
-      "E-commerce de zapatillas con catálogo, filtros, carrito persistente y checkout directo a WhatsApp. Estética neón sobre dark, envíos a todo el país.",
-    tags: ["Next.js", "Tailwind v4", "E-commerce", "WhatsApp"],
-    status: "live",
-    serviceId: "web",
-    industry: "retail",
-    liveUrl: "https://cfstore-ashy.vercel.app",
-    previewImage: "/shots/cfstore.jpg",
-  },
-  {
     id: "food-trucks-triple-c",
     name: "Food Trucks Triple C",
     description:
@@ -187,18 +175,6 @@ export const projects: Project[] = [
     previewImage: "/shots/agusmagicplan.jpg",
   },
   {
-    id: "casi-creativos",
-    name: "Casi Creativos — Packs Digitales",
-    description:
-      "Tienda de packs de contenido para redes con checkout y entrega automática. Catálogo de packs, proceso de compra simple y canal de novedades por WhatsApp.",
-    tags: ["Next.js", "Neon", "Vercel Blob", "E-commerce"],
-    status: "live",
-    serviceId: "web",
-    industry: "retail",
-    liveUrl: "https://casi-creativos.vercel.app",
-    previewImage: "/shots/casi-creativos.jpg",
-  },
-  {
     id: "trucos-para-el-truco",
     name: "Trucos para el Truco — Libro",
     description:
@@ -207,7 +183,7 @@ export const projects: Project[] = [
     status: "live",
     serviceId: "web",
     industry: "retail",
-    liveUrl: "https://trucos-para-el-truco.vercel.app",
+    liveUrl: "https://trucosparaeltruco.com",
     previewImage: "/shots/trucos-para-el-truco.jpg",
   },
   {
@@ -231,7 +207,7 @@ export const projects: Project[] = [
     status: "live",
     serviceId: "web",
     industry: "servicios",
-    liveUrl: "https://carmai.vercel.app",
+    liveUrl: "https://estudiocarmai.com",
     previewImage: "/shots/carmai.jpg",
   },
   {
@@ -243,7 +219,7 @@ export const projects: Project[] = [
     status: "live",
     serviceId: "web",
     industry: "servicios",
-    liveUrl: "https://estudio-calle.vercel.app",
+    liveUrl: "https://estudioimpositivointegral.com.ar",
     previewImage: "/shots/estudio-calle.jpg",
   },
   {
@@ -295,18 +271,6 @@ export const projects: Project[] = [
     previewImage: "/shots/tu-reclamo-web.jpg",
   },
   {
-    id: "jitter-vpn",
-    name: "Jitter VPN — App Android",
-    description:
-      "Landing para servicio de VPN por túnel SSH para Android. Mockup de celular animado, planes, descarga del APK y soporte por WhatsApp. Dark theme tech.",
-    tags: ["React", "Vite", "Tailwind v4", "WhatsApp"],
-    status: "live",
-    serviceId: "web",
-    industry: "servicios",
-    liveUrl: "https://jitter-vpn.vercel.app",
-    previewImage: "/shots/jitter-vpn.jpg",
-  },
-  {
     id: "canedo-sacabollos",
     name: "Canedo Sacabollos — Taller PDR",
     description:
@@ -351,7 +315,7 @@ export const projects: Project[] = [
     status: "live",
     serviceId: "web",
     industry: "educacion",
-    liveUrl: "https://canedo-cursos.vercel.app",
+    liveUrl: "https://cursosdesacabollos.com",
     previewImage: "/shots/canedo-cursos.jpg",
   },
   {
@@ -365,6 +329,200 @@ export const projects: Project[] = [
     industry: "educacion",
     liveUrl: "https://lahoradeljuego.vercel.app",
     previewImage: "/shots/landing-carina.jpg",
+  },
+
+  // ───────────────────────── LANDINGS CON DOMINIO PROPIO (sumadas 2026-09-17)
+  {
+    id: "rcr-soluciones",
+    name: "RCR Soluciones a Empresas",
+    description:
+      "Landing para consultora de seguridad e higiene laboral en Buenos Aires. Servicios dentro del marco legal, rubros atendidos y formulario de consulta.",
+    tags: ["React", "Vite", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "servicios",
+    liveUrl: "https://rcr-soluciones.com.ar",
+    previewImage: "/shots/rcr-soluciones.jpg",
+  },
+  {
+    id: "alpie",
+    name: "Al Pie Entrenamientos",
+    description:
+      "Landing para centro de entrenamiento de fútbol y gimnasio. Presenta el equipo de profes, los jugadores del centro y el contacto para sumarse a entrenar.",
+    tags: ["React", "Vite", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "deportes",
+    liveUrl: "https://alpie.com.ar",
+    previewImage: "/shots/alpie.jpg",
+  },
+  {
+    id: "asppe",
+    name: "ASPPE — Asociación Civil",
+    description:
+      "Sitio institucional de una asociación de profesionales del derecho, la salud y el trabajo social que trabaja el acceso a la salud de personas con discapacidad y sus familias.",
+    tags: ["React", "Vite", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "salud",
+    liveUrl: "https://asppe.org.ar",
+    previewImage: "/shots/asppe.jpg",
+  },
+  {
+    id: "dra-mercedes-bustamante",
+    name: "Dra. Mercedes Bustamante",
+    description:
+      "Landing para cirujana plástica con consultorios en Pilar, Cañitas y Palermo. Procedimientos, credenciales profesionales y contacto para consulta.",
+    tags: ["React", "Vite", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "salud",
+    liveUrl: "https://dramechebustamante.com.ar",
+    previewImage: "/shots/dra-mercedes-bustamante.jpg",
+  },
+  {
+    id: "fremli",
+    name: "Fremli — Construcción y Remodelación",
+    description:
+      "Landing para empresa de construcción y remodelación integral en Zona Oeste, CABA y Provincia. Equipo matriculado, obras y pedido de presupuesto.",
+    tags: ["HTML", "CSS", "Vanilla JS"],
+    status: "live",
+    serviceId: "web",
+    industry: "servicios",
+    liveUrl: "https://fremli.com.ar",
+    previewImage: "/shots/fremli.jpg",
+  },
+  {
+    id: "pci-inversiones",
+    name: "PCI — Planificación y Control de Inversiones",
+    description:
+      "Landing para consultora financiera con más de 20 años de trayectoria: planificación a medida por etapa, resguardo societario y educación financiera.",
+    tags: ["React", "Vite", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "servicios",
+    liveUrl: "https://inversionespci.com.ar",
+    previewImage: "/shots/pci-inversiones.jpg",
+  },
+  {
+    id: "crona-consulting",
+    name: "CRONA Consulting",
+    description:
+      "Sitio para consultora de gestión de activos físicos e industriales: ingeniería de confiabilidad, mantenimiento, telemetría y capacitación para los sectores vial, minero y agrícola.",
+    tags: ["React", "Vite", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "servicios",
+    liveUrl: "https://cronaconsulting.com.ar",
+    previewImage: "/shots/crona-consulting.jpg",
+  },
+  {
+    id: "a-perez-abogados",
+    name: "Estudio Jurídico A. Pérez",
+    description:
+      "Landing para estudio jurídico del Partido de la Costa especializado en derecho de la salud, previsional y sucesorio: amparos contra obras sociales y prepagas y pensiones por discapacidad.",
+    tags: ["HTML", "CSS", "Vanilla JS"],
+    status: "live",
+    serviceId: "web",
+    industry: "servicios",
+    liveUrl: "https://estudiojuridicoaperez.com.ar",
+    previewImage: "/shots/a-perez-abogados.jpg",
+  },
+  {
+    id: "electroben",
+    name: "Electroben — Distribuidora Mayorista",
+    description:
+      "Landing con catálogo por categoría para distribuidora mayorista de electrodomésticos: heladeras, lavarropas, climatización y audio, con armado de pedido y envíos a todo el país.",
+    tags: ["React", "Vite", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "retail",
+    liveUrl: "https://electroben.com.ar",
+    previewImage: "/shots/electroben.jpg",
+  },
+  {
+    id: "castro-marcelo",
+    name: "Lic. Marcelo Castro — Columna y Postura",
+    description:
+      "Landing para kinesiólogo, quiropráctico y posturólogo de Bahía Blanca. Tratamientos de columna, postura y ATM, señales de alerta y reserva de turno.",
+    tags: ["React", "Vite", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "salud",
+    liveUrl: "https://castromarcelo.com.ar",
+    previewImage: "/shots/castro-marcelo.jpg",
+  },
+  {
+    id: "infinita",
+    name: "INFINITA — Rox Gerlero",
+    description:
+      "Landing para un programa inmersivo de tres meses para mujeres: detalle del programa mes a mes, qué incluye y encuentros en vivo con acompañamiento.",
+    tags: ["React", "Vite", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "servicios",
+    liveUrl: "https://serinfinita.com.ar",
+    previewImage: "/shots/infinita.jpg",
+  },
+  {
+    id: "madera-maestra",
+    name: "Madera Maestra — Muebles a Medida",
+    description:
+      "Landing para carpintería de La Plata: cocinas integrales, placards, vestidores y muebles de living, con fabricación propia e instalación y pedido de presupuesto.",
+    tags: ["React", "Vite", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "retail",
+    liveUrl: "https://maderamaestra.com",
+    previewImage: "/shots/madera-maestra.jpg",
+  },
+  {
+    id: "gasotex",
+    name: "GASOTEX — Indumentaria de Trabajo",
+    description:
+      "Sitio para empresa familiar textil de San Martín: catálogo por sector, productos destacados, reseñas de Google y formulario de consulta.",
+    tags: ["React", "Vite", "React Router", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "retail",
+    liveUrl: "https://gasotex.com.ar",
+    previewImage: "/shots/gasotex.jpg",
+  },
+  {
+    id: "psi-matias-hernandez",
+    name: "Lic. Matías Hernández — Psicólogo",
+    description:
+      "Landing para psicólogo y psicoanalista (UBA) con atención exclusivamente online. Enfoque de trabajo, modalidad y contacto para primera consulta.",
+    tags: ["HTML", "CSS", "Vanilla JS"],
+    status: "live",
+    serviceId: "web",
+    industry: "salud",
+    liveUrl: "https://psimatiashernandez.com.ar",
+    previewImage: "/shots/psi-matias-hernandez.jpg",
+  },
+  {
+    id: "plexo-pilates",
+    name: "Plexo Pilates Reformer",
+    description:
+      "Landing para instructorado y formación profesional en pilates reformer: programa integral, seminario de perfeccionamiento y testimonios de alumnas.",
+    tags: ["React", "Vite", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "deportes",
+    liveUrl: "https://plexopilates.com.ar",
+    previewImage: "/shots/plexo-pilates.jpg",
+  },
+  {
+    id: "artefund",
+    name: "Artefund Iluminación",
+    description:
+      "Landing para fábrica de artefactos de iluminación y alumbrado público: fundición de aluminio propia, líneas de producto, venta mayorista y minorista y cotización.",
+    tags: ["React", "Vite", "Tailwind v4"],
+    status: "live",
+    serviceId: "web",
+    industry: "retail",
+    liveUrl: "https://artefund.com.ar",
+    previewImage: "/shots/artefund.jpg",
   },
 
   // ───────────────────────── E-COMMERCE / SISTEMAS con demo interactiva
