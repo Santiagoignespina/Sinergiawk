@@ -31,7 +31,7 @@
 ## Variables de entorno
 | Variable | Seteada en | Para qué |
 |----------|-----------|----------|
-| `N8N_WEBHOOK_URL` | local (.env.local) — **FALTA EN VERCEL** | URL del webhook n8n que recibe las consultas del formulario. Privada: la lee solo el route handler `app/api/contacto/route.ts`. |
+| `N8N_WEBHOOK_URL` | local (.env.local) + Vercel Production y Development. **Falta Preview.** | URL del webhook n8n que recibe las consultas del formulario. Privada: la lee solo el route handler `app/api/contacto/route.ts`. |
 | `NEXT_PUBLIC_N8N_WEBHOOK_URL` | Vercel (Dev/Preview/Prod) | **OBSOLETA** desde 2026-09-17. Era la misma URL pero expuesta en el bundle del navegador. Borrar de Vercel una vez que `N8N_WEBHOOK_URL` esté cargada y deployada. |
 | `VERCEL_PROJECT_PRODUCTION_URL` | la inyecta Vercel sola | De ahí sale el dominio en metadata, sitemap y robots (ver `lib/site.ts`). |
 
@@ -52,8 +52,10 @@
 - **Las capturas de n8n de las demos siguen como `<img>` crudo** (no `next/image`): se muestran al 160% de ancho dentro de un contenedor con scroll para que se lean los nodos, y están detrás de un click. El resto de las imágenes sí pasa por `next/image`.
 
 ## Pendientes / deuda conocida
-- **Cargar `N8N_WEBHOOK_URL` en Vercel producción ANTES del próximo deploy**, o el formulario responde 500. Después borrar `NEXT_PUBLIC_N8N_WEBHOOK_URL`.
-- **Smoke test del formulario contra producción sin hacer**: el camino feliz (envío real que llegue a n8n) nunca se probó punta a punta; todo lo verificado fue con el envío interceptado.
+- **`N8N_WEBHOOK_URL` falta en el entorno Preview de Vercel** (Production y Development ya están). Los deploys de preview van a responder 500 en el formulario hasta cargarla.
+- **Borrar `NEXT_PUBLIC_N8N_WEBHOOK_URL` de Vercel** una vez deployado el código nuevo. Mientras siga ahí, la URL del webhook sigue expuesta en los bundles viejos.
+- **El código nuevo todavía no está deployado**: producción sigue sirviendo la versión de junio, con el bug del audio. Hay dos commits locales sin pushear ni deployar.
+- **lse.com.ar está roto y por eso quedó afuera del portfolio**: el dominio resuelve al hosting viejo (DonWeb/Ferozo) y sirve "Su sitio web no posee certificado SSL" en lugar del sitio, que sí está bien deployado en Vercel. Hay que corregir los registros DNS del dominio.
 - Sin rate limit en `/api/contacto`. Hay honeypot y validación, pero un bot dedicado igual puede spamear.
 - Las demos de automatizaciones (`components/demos/`) todavía muestran nombres de pacientes y "/Mr.Bracket" en algunas pantallas — pendiente genericizar.
 - 4 warnings de eslint preexistentes (variables sin usar en BrideonDemo, CRMDemo, RecordatorioDemo).
@@ -61,4 +63,7 @@
 - Warning de build: hay dos `package-lock.json` (este y uno en `C:\Users\santi\`) y Turbopack infiere mal la raíz del workspace.
 
 ## Última auditoría
-- 2026-09-17 — análisis + fixes en esta sesión (bug de audio, webhook privado, next/image, dominio unificado, código muerto). No se corrió `/auditar` completo; no existe `AUDITORIA.md`.
+- 2026-09-17 — análisis + fixes en esta sesión (bug de audio, webhook privado, next/image, dominio unificado, código muerto) y renovación del portfolio. No se corrió `/auditar` completo; no existe `AUDITORIA.md`.
+
+## Smoke test del formulario
+- 2026-09-17, contra el dev server con el webhook real: camino texto y camino audio, los dos llegaron a n8n y devolvieron 200. Validaciones del route handler probadas una por una (honeypot, campos faltantes, JSON inválido, audio >3MB). **Falta repetirlo sobre la URL de producción después del deploy.**
