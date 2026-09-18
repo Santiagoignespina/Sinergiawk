@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import Image from "next/image";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -18,8 +19,14 @@ export default function Navbar() {
     >
       <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
         <a href="#top" className="flex items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/logo.png" alt="Sinergia" className="h-14 w-auto object-contain" />
+          <Image
+            src="/logo.png"
+            alt="Sinergia"
+            width={48}
+            height={56}
+            priority
+            className="h-14 w-auto object-contain"
+          />
         </a>
         <div className="hidden md:flex items-center gap-8 text-sm text-white/70">
           <a href="#landings" className="hover:text-[#FF4D00] transition-colors">Landings</a>

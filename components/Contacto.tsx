@@ -4,10 +4,21 @@ import AudioRecorder from "@/components/AudioRecorder";
 
 type InputMode = "text" | "audio";
 
-const N8N_WEBHOOK_URL = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || "";
+// FileReader convierte el blob entero sin pasar por el stack de argumentos:
+// con btoa(String.fromCharCode(...bytes)) un audio de mas de ~120KB tiraba RangeError.
+const blobToBase64 = (blob: Blob): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      resolve(result.slice(result.indexOf(",") + 1));
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(blob);
+  });
 
 export default function Contacto() {
-  const [form, setForm] = useState({ nombre: "", celular: "", mensaje: "", audio: null as Blob | null });
+  const [form, setForm] = useState({ nombre: "", celular: "", mensaje: "", empresa: "", audio: null as Blob | null });
   const [inputMode, setInputMode] = useState<InputMode>("text");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -19,6 +30,10 @@ export default function Contacto() {
 
     if (!form.nombre.trim()) {
       setError("Completá tu nombre.");
+      return;
+    }
+    if (!form.celular.trim()) {
+      setError("Dejanos tu celular así te podemos responder.");
       return;
     }
     if (inputMode === "text" && !form.mensaje.trim()) {
@@ -34,30 +49,25 @@ export default function Contacto() {
     try {
       let audioBase64: string | null = null;
       if (inputMode === "audio" && form.audio) {
-        const buffer = await form.audio.arrayBuffer();
-        audioBase64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+        audioBase64 = await blobToBase64(form.audio);
       }
 
       const payload = {
         nombre: form.nombre,
         celular: form.celular,
+        empresa: form.empresa,
         tipo: inputMode,
         mensaje: inputMode === "text" ? form.mensaje : null,
         audio: audioBase64,
         audioMime: audioBase64 ? "audio/webm" : null,
       };
 
-      if (N8N_WEBHOOK_URL) {
-        const res = await fetch(N8N_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error("Error al enviar");
-      } else {
-        await new Promise((r) => setTimeout(r, 1000));
-        console.log("Form data (dev):", payload);
-      }
+      const res = await fetch("/api/contacto", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("Error al enviar");
 
       setSuccess(true);
     } catch {
@@ -114,7 +124,7 @@ export default function Contacto() {
 
           {/* Celular */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-white/60 text-sm">Celular</label>
+            <label className="text-white/60 text-sm">Celular *</label>
             <input
               type="tel"
               placeholder="+54 9 11 1234-5678"
@@ -123,6 +133,18 @@ export default function Contacto() {
               className="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#FF4D00]/50 transition-colors"
             />
           </div>
+
+          {/* Honeypot anti-spam: invisible para personas, tentador para bots */}
+          <input
+            type="text"
+            name="empresa"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            value={form.empresa}
+            onChange={(e) => setForm({ ...form, empresa: e.target.value })}
+            className="absolute -left-[9999px] w-px h-px opacity-0"
+          />
 
           {/* Tipo de mensaje */}
           <div className="flex flex-col gap-2">

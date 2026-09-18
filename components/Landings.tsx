@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { projects, industryLabels, type Industry } from "@/data/projects";
 
 type FilterValue = "todos" | Industry;
@@ -76,13 +77,13 @@ export default function Landings() {
               rel="noopener noreferrer"
               className="group card-hover bg-[#121212] border border-white/10 hover:border-[#FF4D00]/40 rounded-2xl overflow-hidden flex flex-col"
             >
-              <div className="h-48 border-b border-white/10 bg-[#0A0A0A] overflow-hidden">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={p.previewImage}
+              <div className="relative h-48 border-b border-white/10 bg-[#0A0A0A] overflow-hidden">
+                <Image
+                  src={p.previewImage!}
                   alt={`Captura de ${p.name}`}
-                  loading="lazy"
-                  className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover object-top group-hover:scale-[1.03] transition-transform duration-500"
                 />
               </div>
 

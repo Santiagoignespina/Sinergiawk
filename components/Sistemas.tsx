@@ -1,5 +1,6 @@
 "use client";
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import { projects } from "@/data/projects";
 import DashboardDemo from "@/components/demos/DashboardDemo";
 import TurneroDemo from "@/components/demos/TurneroDemo";
@@ -56,14 +57,14 @@ export default function Sistemas() {
               key={p.id}
               className="card-hover bg-[#121212] border border-white/10 rounded-2xl overflow-hidden flex flex-col"
             >
-              <div className="h-52 border-b border-white/10 bg-[#0A0A0A] overflow-hidden">
+              <div className="relative h-52 border-b border-white/10 bg-[#0A0A0A] overflow-hidden">
                 {p.previewImage ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={p.previewImage}
                     alt={`Captura de ${p.name}`}
-                    loading="lazy"
-                    className="w-full h-full object-cover object-top"
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover object-top"
                   />
                 ) : (
                   <div className="w-full h-full p-2">{p.demo ? demoMap[p.demo] : null}</div>

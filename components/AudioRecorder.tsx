@@ -7,6 +7,9 @@ interface AudioRecorderProps {
 
 type RecordingState = "idle" | "recording" | "paused" | "done";
 
+// Tope de duracion: mantiene el audio en un tamano que el webhook acepta sin problemas.
+const MAX_SECONDS = 120;
+
 export default function AudioRecorder({ onAudioReady }: AudioRecorderProps) {
   const [state, setState] = useState<RecordingState>("idle");
   const [audioUrl, setAudioUrl] = useState<string | null>(null);
@@ -86,6 +89,11 @@ export default function AudioRecorder({ onAudioReady }: AudioRecorderProps) {
       setState("done");
     }
   };
+
+  useEffect(() => {
+    if (state === "recording" && seconds >= MAX_SECONDS) finishRecording();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seconds, state]);
 
   const deleteAudio = () => {
     setAudioUrl(null);
@@ -167,7 +175,7 @@ export default function AudioRecorder({ onAudioReady }: AudioRecorderProps) {
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 bg-red-500 rounded-full animate-ping" />
               <span className="font-bold text-red-400 text-sm">{formatTime(seconds)}</span>
-              <span className="text-white/40 text-sm">Grabando...</span>
+              <span className="text-white/40 text-sm">Grabando... (max {formatTime(MAX_SECONDS)})</span>
             </div>
           )}
           {state === "paused" && (

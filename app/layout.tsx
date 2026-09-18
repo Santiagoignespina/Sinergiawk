@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
+import { siteUrl } from "@/lib/site";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -8,10 +9,6 @@ const spaceGrotesk = Space_Grotesk({
   weight: ["500", "600", "700"],
 });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-
-const siteUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : "https://santiagoignespina.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
