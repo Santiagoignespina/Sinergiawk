@@ -11,11 +11,16 @@
   --tinta: #15161a;
   --tinta-suave: #5d6068;
   --linea: #dcd8cf;
-  --acento: #e8442b;
+  /* Colores del logo. El azul del logo (#008bfc) no llega al contraste mínimo con
+     texto blanco ni como texto sobre blanco: para botones y textos va uno apenas
+     más profundo, y el degradé del logo queda para superficies grandes y rayas. */
+  --acento: #0a6cf5;
   --acento-tinta: #ffffff;
-
-  --logo-acento: var(--acento);
-  --logo-acento-tinta: var(--acento-tinta);
+  --celeste: #06d1fc;
+  --degrade: linear-gradient(135deg, #0a6cf5 0%, #008bfc 45%, #03d7fc 100%);
+  --degrade-raya: linear-gradient(90deg, #008bfc, #03d7fc);
+  /* Los errores siguen en rojo: en azul se leerían como un aviso cualquiera. */
+  --error: #d23a20;
 
   --marco-radio: 12px;
   --marco-linea: 1px;
@@ -54,7 +59,7 @@
   height: 5px;
   margin-top: 14px;
   border-radius: 999px;
-  background: var(--acento);
+  background: var(--degrade-raya);
 }
 
 /* ---------- Nav ---------- */
@@ -72,7 +77,7 @@
   border-bottom: 1px solid var(--linea);
 }
 
-.v-vitrina .nav__marca { color: var(--tinta); text-decoration: none; }
+.v-vitrina .nav__marca { display: flex; color: var(--tinta); text-decoration: none; }
 
 .v-vitrina .nav__links {
   display: flex;
@@ -130,16 +135,28 @@
 
 .v-vitrina .intro__logo {
   position: relative;
-  font-size: clamp(3rem, 15vw, 9.5rem);
+  width: min(82vw, 760px);
+  height: auto;
+  overflow: visible;
   color: var(--tinta);
 }
 
-/* Arrancan invisibles: el JS las muestra ya fuera de la pantalla. */
-.v-vitrina .intro__pieza { opacity: 0; transform-origin: 50% 100%; }
-.v-vitrina .intro__ia-y { display: inline-block; transform-origin: 50% 100%; }
-/* En el nav el bloque es ítem del flex y mide lo que la línea; acá va envuelto y
-   quedaría más alto: inline-block lo iguala para que no salte al aterrizar. */
-.v-vitrina .intro__ia-y .logo-sinergia__ia { display: inline-block; }
+/* Arrancan invisibles: el JS las muestra ya fuera de su lugar. transform-box hace
+   que el origen (abajo al centro, para el aplastado al caer) sea el de cada pieza
+   y no el del dibujo entero. */
+.v-vitrina .intro__pieza,
+.v-vitrina .intro__ia-y { transform-box: fill-box; transform-origin: 50% 100%; }
+.v-vitrina .intro__pieza { opacity: 0; }
+
+.v-vitrina .intro__frase {
+  opacity: 0;
+  transform-box: fill-box;
+  font-family: inherit;
+  font-size: 31.5px;
+  font-weight: 400;
+  fill: var(--tinta-suave);
+}
+.v-vitrina .intro__punto { fill: var(--celeste); }
 
 .v-vitrina .intro__pista {
   position: absolute;
@@ -208,8 +225,8 @@
 }
 
 .v-vitrina .portada__cifra--fuerte {
-  background: var(--acento);
-  border-color: var(--acento);
+  background: var(--degrade);
+  border-color: transparent;
   color: var(--acento-tinta);
 }
 
@@ -549,8 +566,8 @@
   margin: 0;
   padding: 10px 14px;
   border-radius: 12px;
-  background: color-mix(in srgb, var(--acento) 12%, transparent);
-  color: var(--acento);
+  background: color-mix(in srgb, var(--error) 12%, transparent);
+  color: var(--error);
   font-size: 0.88rem;
 }
 

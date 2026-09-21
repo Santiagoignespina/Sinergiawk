@@ -123,29 +123,11 @@ html:has(.v-vitrina) { background: #ece9e2; }
 }
 
 /* =========================================================================
-   Logotipo
-   El acento va en el bloque de atrás del "ia", nunca en el color del texto.
-   Cada variante define --logo-acento y --logo-acento-tinta.
+   Logotipo (components/comunes/LogoSinergia.tsx): un SVG; SINERG toma el color
+   del texto del contenedor.
    ========================================================================= */
 
 .logo-sinergia {
-  display: inline-flex;
-  align-items: baseline;
-  line-height: 1;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-  user-select: none;
-}
-
-.logo-sinergia__base {
-  font-weight: 300;
-}
-
-.logo-sinergia__ia {
-  font-weight: 800;
-  background: var(--logo-acento, currentColor);
-  color: var(--logo-acento-tinta, #fff);
-  padding: 0.06em 0.16em 0.1em 0.12em;
-  margin-left: 0.06em;
-  border-radius: 0.14em;
+  display: block;
+  flex-shrink: 0;
 }

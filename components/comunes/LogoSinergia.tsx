@@ -1,39 +1,76 @@
+import {
+  LETRAS_ERG,
+  LETRAS_IA,
+  LETRAS_SIN,
+  LOGO_ALTO,
+  LOGO_ANCHO,
+  LOGO_CELESTE,
+  LOGO_DEGRADE,
+  LOGO_VIEWBOX,
+  TRAZO_ABAJO,
+  TRAZO_ARRIBA,
+} from "./logoTrazos";
+
 /**
- * Logotipo de Sinergia.
+ * Logo de Sinergia: el símbolo S (dos trazos con el degradé azul → celeste) y la
+ * palabra SINERG + IA. Es la versión para fondo claro del logo que armó Santiago
+ * (el original, para fondo oscuro, tiene SINERG en blanco): acá SINERG toma el
+ * color del texto (currentColor).
  *
- * Conserva la idea buena del logo viejo —"SINERG" + "IA" destacado, que juega
- * con la sigla— y descarta lo que no servía: la ilustración del laptop, ilegible
- * a 56px de alto, y el subtítulo "AUTOMATIZACIONES", que hoy queda corto.
- *
- * El "IA" no se destaca con color de texto sino con peso y con un BLOQUE de
- * acento detrás. La regla de la casa es un solo color de texto por fondo: el
- * acento vive en bloques, bordes y reglas, nunca en una palabra suelta.
- *
- * Es texto, no paths: así toma la tipografía de la variante que lo monta, que es
- * justo lo que queremos mientras se comparan las tres direcciones. Cuando una
- * gane se vectoriza para el favicon.
+ * Los trazos se definen UNA vez en <LogoDefs /> y cada logo los reusa con <use>:
+ * el menú, el pie y la intro no repiten los paths en el HTML. <LogoDefs /> tiene
+ * que estar montado en la página antes que cualquier logo.
  */
 
+export const ID = {
+  degrade: "sinergia-degrade",
+  trazoArriba: "sinergia-trazo-arriba",
+  trazoAbajo: "sinergia-trazo-abajo",
+  sin: "sinergia-sin",
+  erg: "sinergia-erg",
+  ia: "sinergia-ia",
+} as const;
+
+export function LogoDefs() {
+  // No va con display:none: en Chrome un degradé definido dentro de un SVG oculto no pinta.
+  return (
+    <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id={ID.degrade} x1="0" y1="1" x2="1" y2="0">
+          <stop offset="0" stopColor={LOGO_DEGRADE[0]} />
+          <stop offset="1" stopColor={LOGO_DEGRADE[1]} />
+        </linearGradient>
+        <path id={ID.trazoArriba} d={TRAZO_ARRIBA} fill={`url(#${ID.degrade})`} />
+        <path id={ID.trazoAbajo} d={TRAZO_ABAJO} fill={`url(#${ID.degrade})`} />
+        <path id={ID.sin} d={LETRAS_SIN} fillRule="evenodd" />
+        <path id={ID.erg} d={LETRAS_ERG} fillRule="evenodd" />
+        <path id={ID.ia} d={LETRAS_IA} fillRule="evenodd" fill={LOGO_CELESTE} />
+      </defs>
+    </svg>
+  );
+}
+
 export default function LogoSinergia({
-  alto = 24,
+  alto = 32,
   className = "",
 }: {
   alto?: number;
   className?: string;
 }) {
   return (
-    <span
+    <svg
       className={`logo-sinergia ${className}`}
-      style={{ fontSize: alto }}
+      viewBox={LOGO_VIEWBOX}
+      width={Math.round((alto * LOGO_ANCHO) / LOGO_ALTO)}
+      height={alto}
       role="img"
       aria-label="Sinergia"
     >
-      <span className="logo-sinergia__base" aria-hidden="true">
-        Sinerg
-      </span>
-      <span className="logo-sinergia__ia" aria-hidden="true">
-        ia
-      </span>
-    </span>
+      <use href={`#${ID.trazoArriba}`} />
+      <use href={`#${ID.trazoAbajo}`} />
+      <use href={`#${ID.sin}`} fill="currentColor" />
+      <use href={`#${ID.erg}`} fill="currentColor" />
+      <use href={`#${ID.ia}`} />
+    </svg>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 import Image from "next/image";
-import LogoSinergia from "@/components/comunes/LogoSinergia";
+import LogoSinergia, { LogoDefs } from "@/components/comunes/LogoSinergia";
 import IconoWA from "@/components/comunes/IconoWA";
 import DemoFrame from "@/components/comunes/DemoFrame";
 import DemoStage from "@/components/comunes/DemoStage";
@@ -213,10 +213,11 @@ export default function Vitrina() {
 
   return (
     <div className="v-vitrina">
+      <LogoDefs />
       <IntroBienvenida />
       <header className="nav">
         <a className="nav__marca" href="#top" aria-label={MARCA}>
-          <LogoSinergia alto={26} />
+          <LogoSinergia alto={32} />
         </a>
         <nav className="nav__links">
           <a href="#trabajo">Clientes</a>
@@ -346,7 +347,7 @@ export default function Vitrina() {
         </section>
 
         <footer className="pie">
-          <LogoSinergia alto={18} />
+          <LogoSinergia alto={22} />
           <span>© {new Date().getFullYear()} · Desarrollo web y sistemas a medida</span>
         </footer>
       </main>
