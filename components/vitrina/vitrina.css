@@ -11,16 +11,10 @@
   --tinta: #15161a;
   --tinta-suave: #5d6068;
   --linea: #dcd8cf;
-  /* Colores del logo. El azul del logo (#008bfc) no llega al contraste mínimo con
-     texto blanco ni como texto sobre blanco: para botones y textos va uno apenas
-     más profundo, y el degradé del logo queda para superficies grandes y rayas. */
-  --acento: #0a6cf5;
+  --acento: #e8442b;
   --acento-tinta: #ffffff;
-  --celeste: #06d1fc;
-  --degrade: linear-gradient(135deg, #0a6cf5 0%, #008bfc 45%, #03d7fc 100%);
-  --degrade-raya: linear-gradient(90deg, #008bfc, #03d7fc);
-  /* Los errores siguen en rojo: en azul se leerían como un aviso cualquiera. */
-  --error: #d23a20;
+  /* El naranja claro del logo: el "IA" y los puntos de la frase de la intro. */
+  --logo-ia: #ff7a2e;
 
   --marco-radio: 12px;
   --marco-linea: 1px;
@@ -59,7 +53,7 @@
   height: 5px;
   margin-top: 14px;
   border-radius: 999px;
-  background: var(--degrade-raya);
+  background: var(--acento);
 }
 
 /* ---------- Nav ---------- */
@@ -156,7 +150,7 @@
   font-weight: 400;
   fill: var(--tinta-suave);
 }
-.v-vitrina .intro__punto { fill: var(--celeste); }
+.v-vitrina .intro__punto { fill: var(--logo-ia); }
 
 .v-vitrina .intro__pista {
   position: absolute;
@@ -225,8 +219,8 @@
 }
 
 .v-vitrina .portada__cifra--fuerte {
-  background: var(--degrade);
-  border-color: transparent;
+  background: var(--acento);
+  border-color: var(--acento);
   color: var(--acento-tinta);
 }
 
@@ -566,8 +560,8 @@
   margin: 0;
   padding: 10px 14px;
   border-radius: 12px;
-  background: color-mix(in srgb, var(--error) 12%, transparent);
-  color: var(--error);
+  background: color-mix(in srgb, var(--acento) 12%, transparent);
+  color: var(--acento);
   font-size: 0.88rem;
 }
 

@@ -42,22 +42,12 @@ def trazar(caja, lab, ids, suavizado, tolerancia):
     return "".join(d)
 
 
-def color(caja, lab, ids):
-    x0, y0, x1, y1 = caja
-    sel = np.isin(lab, ids) & (src[y0:y1, x0:x1, 3] > 250)
-    return "#%02x%02x%02x" % tuple(int(v) for v in src[y0:y1, x0:x1, :3][sel].mean(0))
-
-
 # Símbolo: dos trazos (arriba y abajo). El borde de la imagen original es irregular, por eso
 # el suavizado es mayor que en las letras.
 CS = (390, 185, 700, 515)
 lab, cs = componentes(CS)
 cs.sort(key=lambda c: c[1])
 trazos = [trazar(CS, lab, [c[2]], 2.4, 0.8) for c in cs]
-reg = src[CS[1]:CS[3], CS[0]:CS[2]]
-ys, xs = np.nonzero(reg[:, :, 3] > 250)
-t = xs - ys
-degrade = ["#%02x%02x%02x" % tuple(int(v) for v in reg[ys[m], xs[m], :3].mean(0)) for m in (t < t.min() + 25, t > t.max() - 25)]
 
 # Palabra: 8 letras, de izquierda a derecha.
 CP = (715, 250, 1780, 395)
@@ -65,20 +55,15 @@ lab, cs = componentes(CP)
 ids = [c[2] for c in sorted(cs)]
 assert len(ids) == 8, f"se esperaban 8 letras y hay {len(ids)}"
 sin, erg, ia = (trazar(CP, lab, ids[a:b], 1.2, 0.25) for a, b in ((0, 3), (3, 6), (6, 8)))
-celeste = color(CP, lab, ids[6:8])
 
 ts = f'''// GENERADO por scripts/logo/trazar_logo.py a partir de scripts/logo/sinergia-logo-original.png.
 // No editar a mano: si cambia el logo, se reemplaza el PNG y se corre el script.
 // Coordenadas del logo: el símbolo va de x 0 a 281 y la palabra de x 332 a 1370 (y 70 a 199).
+// Solo formas: los colores los define el sitio (components/comunes/LogoSinergia.tsx).
 
 export const LOGO_VIEWBOX = "0 4 1378 316";
 export const LOGO_ANCHO = 1378;
 export const LOGO_ALTO = 316;
-
-/** Degradé del símbolo: de abajo a la izquierda (azul) a arriba a la derecha (celeste). */
-export const LOGO_DEGRADE = ["{degrade[0]}", "{degrade[1]}"] as const;
-/** Color del "IA". */
-export const LOGO_CELESTE = "{celeste}";
 
 export const TRAZO_ARRIBA = "{trazos[0]}";
 export const TRAZO_ABAJO = "{trazos[1]}";
@@ -87,4 +72,4 @@ export const LETRAS_ERG = "{erg}";
 export const LETRAS_IA = "{ia}";
 '''
 (RAIZ / "components" / "comunes" / "logoTrazos.ts").write_text(ts, encoding="utf-8", newline="\n")
-print("ok", degrade, celeste, {k: len(v) for k, v in (("trazos", "".join(trazos)), ("sin", sin), ("erg", erg), ("ia", ia))})
+print("ok", {k: len(v) for k, v in (("trazos", "".join(trazos)), ("sin", sin), ("erg", erg), ("ia", ia))})
