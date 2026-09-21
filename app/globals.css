@@ -131,3 +131,11 @@ html:has(.v-vitrina) { background: #ece9e2; }
   display: block;
   flex-shrink: 0;
 }
+
+/* La frase va en unidades del dibujo (el logo mide 316 de alto). */
+.logo-sinergia__frase {
+  font-family: inherit;
+  font-size: 31.5px;
+  font-weight: 400;
+  fill: var(--tinta-suave, #5d6068);
+}

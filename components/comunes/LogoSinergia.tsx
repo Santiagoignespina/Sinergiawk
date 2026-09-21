@@ -56,11 +56,31 @@ export function LogoDefs() {
   );
 }
 
+/**
+ * La frase del logo, como texto real (Jost) estirado al ancho de la palabra, en
+ * las coordenadas del logo: va adentro del <svg> de un logo. La usan el logo del
+ * menú y la intro, así los dos quedan iguales y la intro aterriza exacto.
+ */
+export function FraseLogo({ className = "" }: { className?: string }) {
+  return (
+    <text className={`logo-sinergia__frase ${className}`} x="337" y="267" textLength="1039" lengthAdjust="spacing">
+      {"DESARROLLO "}
+      <tspan fill={COLOR_IA}>•</tspan>
+      {" SISTEMAS "}
+      <tspan fill={COLOR_IA}>•</tspan>
+      {" AUTOMATIZACIÓN"}
+    </text>
+  );
+}
+
 export default function LogoSinergia({
   alto = 32,
+  frase = false,
   className = "",
 }: {
   alto?: number;
+  /** Con la frase "DESARROLLO • SISTEMAS • AUTOMATIZACIÓN" debajo de la palabra. */
+  frase?: boolean;
   className?: string;
 }) {
   return (
@@ -70,13 +90,14 @@ export default function LogoSinergia({
       width={Math.round((alto * LOGO_ANCHO) / LOGO_ALTO)}
       height={alto}
       role="img"
-      aria-label="Sinergia"
+      aria-label={frase ? "Sinergia: desarrollo, sistemas, automatización" : "Sinergia"}
     >
       <use href={`#${ID.trazoArriba}`} />
       <use href={`#${ID.trazoAbajo}`} />
       <use href={`#${ID.sin}`} fill="currentColor" />
       <use href={`#${ID.erg}`} fill="currentColor" />
       <use href={`#${ID.ia}`} />
+      {frase && <FraseLogo />}
     </svg>
   );
 }

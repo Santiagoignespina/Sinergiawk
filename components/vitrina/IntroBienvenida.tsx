@@ -1,15 +1,15 @@
 "use client";
 
 import { useLayoutEffect, useRef } from "react";
-import { ID } from "@/components/comunes/LogoSinergia";
+import { FraseLogo, ID } from "@/components/comunes/LogoSinergia";
 import { LOGO_ALTO, LOGO_ANCHO, LOGO_VIEWBOX } from "@/components/comunes/logoTrazos";
 
 /**
  * Intro de bienvenida: el logo se arma de a partes. Primero la S, con sus dos
  * trazos que entran en diagonal y encastran; después cae "SIN", cae "ERG", y el
- * "IA" celeste entra desde la izquierda de la pantalla, pasa por arriba de las
+ * "IA" entra desde la izquierda de la pantalla, pasa por arriba de las
  * letras y cae en su lugar. Aparece la frase del logo y todo vuela a acomodarse
- * en el nav mientras se destapa la página.
+ * en el nav (que muestra el logo entero, con la frase) mientras se destapa la página.
  *
  * Una vez por sesión: recargar no la repite, una pestaña nueva sí. Se saltea con
  * un clic, un toque o una tecla, y no corre con prefers-reduced-motion.
@@ -181,11 +181,9 @@ export default function IntroBienvenida() {
 
     pista.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: 700, fill: "forwards" });
 
-    // Vuelo al logo del nav mientras se destapa la página. La frase no está en el
-    // logo del nav: se va antes de volar.
+    // Vuelo al logo del nav mientras se destapa la página.
     luego(T_VUELO, () => {
       pista.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 200, fill: "forwards" });
-      frase.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220, fill: "forwards" });
       fondo.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 650, delay: 150, easing: "ease", fill: "forwards" });
       if (!navLogo) {
         logo.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: "forwards" }).finished.then(terminar, () => {});
@@ -239,14 +237,7 @@ export default function IntroBienvenida() {
               <use href={`#${ID.ia}`} />
             </g>
           </g>
-          {/* La frase del logo como texto real, estirada al ancho de la palabra. */}
-          <text className="intro__frase" x="337" y="267" textLength="1039" lengthAdjust="spacing">
-            {"DESARROLLO "}
-            <tspan className="intro__punto">•</tspan>
-            {" SISTEMAS "}
-            <tspan className="intro__punto">•</tspan>
-            {" AUTOMATIZACIÓN"}
-          </text>
+          <FraseLogo className="intro__frase" />
         </svg>
         <p className="intro__pista">Tocá para saltear</p>
       </div>

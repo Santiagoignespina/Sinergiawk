@@ -217,7 +217,7 @@ export default function Vitrina() {
       <IntroBienvenida />
       <header className="nav">
         <a className="nav__marca" href="#top" aria-label={MARCA}>
-          <LogoSinergia alto={32} />
+          <LogoSinergia alto={64} frase />
         </a>
         <nav className="nav__links">
           <a href="#trabajo">Clientes</a>

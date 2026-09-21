@@ -13,8 +13,6 @@
   --linea: #dcd8cf;
   --acento: #e8442b;
   --acento-tinta: #ffffff;
-  /* El naranja claro del logo: el "IA" y los puntos de la frase de la intro. */
-  --logo-ia: #ff7a2e;
 
   --marco-radio: 12px;
   --marco-linea: 1px;
@@ -142,15 +140,7 @@
 .v-vitrina .intro__ia-y { transform-box: fill-box; transform-origin: 50% 100%; }
 .v-vitrina .intro__pieza { opacity: 0; }
 
-.v-vitrina .intro__frase {
-  opacity: 0;
-  transform-box: fill-box;
-  font-family: inherit;
-  font-size: 31.5px;
-  font-weight: 400;
-  fill: var(--tinta-suave);
-}
-.v-vitrina .intro__punto { fill: var(--logo-ia); }
+.v-vitrina .intro__frase { opacity: 0; transform-box: fill-box; }
 
 .v-vitrina .intro__pista {
   position: absolute;
@@ -633,6 +623,8 @@
 @media (max-width: 620px) {
   .v-vitrina .nav { gap: 14px; padding: 12px 16px; }
   .v-vitrina .nav__links { display: none; }
+  /* El logo entero (con la frase) achicado para que entre con el botón. */
+  .v-vitrina .nav__marca .logo-sinergia { width: auto; height: 44px; }
   /* Sin los links, nadie empuja el botón a la derecha: lo empuja él mismo. */
   .v-vitrina .nav__cta { margin-left: auto; }
 
@@ -653,4 +645,9 @@
   .v-vitrina .portada__cifra { min-height: 104px; }
   .v-vitrina .pie { padding-bottom: 130px; }
   .v-vitrina .wa-float { width: 50px; height: 50px; right: 16px; bottom: 82px; }
+}
+
+/* Celulares muy angostos (360 px): un poco más chico, si no no entra con el botón. */
+@media (max-width: 380px) {
+  .v-vitrina .nav__marca .logo-sinergia { height: 40px; }
 }
