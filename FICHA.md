@@ -27,7 +27,7 @@
 ## Deploy
 - **Plataforma**: Vercel (proyecto `sinergiawk`)
 - **URL**: https://www.sinergiawk.com (producción)
-- **Método**: Vercel CLI desde local
+- **Método**: Vercel CLI desde local, y ADEMÁS la integración de GitHub: cada `git push` a `master` dispara un deploy de producción (comprobado 2026-09-21). No pushear a master nada que no deba salir al aire.
 - **Repo git**: propio — `github.com/Santiagoignespina/Sinergiawk`, branch `master`
 
 ## Variables de entorno
