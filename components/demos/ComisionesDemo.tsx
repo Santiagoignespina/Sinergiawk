@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const screens = ["Flujo n8n", "Datos"] as const;
+const screens = ["Datos", "Flujo n8n"] as const;
 type Screen = (typeof screens)[number];
 
 const N8N_BG     = "#111118";
@@ -19,7 +19,7 @@ const filas = [
 ];
 
 export default function ComisionesDemo() {
-  const [screen, setScreen] = useState<Screen>("Flujo n8n");
+  const [screen, setScreen] = useState<Screen>("Datos");
 
   return (
     <div className="w-full h-full flex flex-col overflow-hidden rounded-xl select-none"

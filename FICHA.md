@@ -1,18 +1,20 @@
 # FICHA — sinergia (landing sinergiawk.com)
 
-> Actualizada: 2026-09-17. Regenerar con /cerrar-proyecto tras cambios grandes.
+> Actualizada: 2026-09-21 (rediseño Vitrina). Regenerar con /cerrar-proyecto tras cambios grandes.
 
 ## Resumen
 - **Cliente**: proyecto propio (portfolio de Santiago Ignespina)
 - **Qué es**: portfolio web de una sola página que muestra landings, sistemas y automatizaciones hechas, y capta consultas por formulario (texto o audio) hacia n8n.
 - **Estado**: en producción
+- **Diseño actual**: "Vitrina" (desde 2026-09-21). Salió del laboratorio `proyectos/sinergia-variantes` (variante A · Vitrina), elegida por Santiago y copiada tal cual. Desde ahora los cambios se hacen ACÁ: el laboratorio ya no es la fuente.
 
 ## Stack
 - Next.js 16.2.1 (App Router, Turbopack) + React 19.2.4
 - Tailwind CSS v4 (`@theme inline` en `app/globals.css`)
 - TypeScript 5
-- Tipografías vía next/font: Space Grotesk (display) + Inter (body)
-- Paleta: fondo `#0A0A0A`, surface `#121212`, acento único `#FF4D00`
+- Tipografía vía next/font: Jost (300 a 600), declarada en `app/page.tsx` como `--font-vitrina`
+- Paleta (tokens en `components/vitrina/vitrina.css`): fondo hueso `#ece9e2`, placas `#ffffff`, tinta `#15161a`, acento único `#e8442b`
+- Estructura: `components/vitrina/` (la página, la intro y su CSS, todo bajo `.v-vitrina`), `components/comunes/` (logo, marco y escenario de las demos, formulario), `components/demos/`, `lib/catalogo.ts` (orden y filtros del portfolio), `lib/marca.ts` (nombre y WhatsApp), `lib/useContacto.ts` (lógica del formulario)
 
 ## Comandos
 - `npm run dev` — dev server (Turbopack)
@@ -39,16 +41,17 @@
 - Sin base de datos. El sitio es estático salvo el route handler `/api/contacto`.
 
 ## Integraciones
-- **WhatsApp**: `5491170637316` (+54 9 11 7063-7316) — número de la instancia Sinergia de Evolution API. Hardcodeado en `components/Hero.tsx` (`WA_NUMERO`) y `components/WhatsAppFloat.tsx`, como link `wa.me` con mensaje pre-cargado.
+- **WhatsApp**: `5491170637316` (+54 9 11 7063-7316) — número de la instancia Sinergia de Evolution API. Vive en un solo lugar, `lib/marca.ts` (`WA_SINERGIA`, `waLink()`), como link `wa.me` con mensaje pre-cargado.
 - **n8n**: el formulario postea a `/api/contacto`, que reenvía al webhook de n8n. Payload: `{nombre, celular, tipo, mensaje, audio, audioMime}`; `tipo` es `"text"` o `"audio"`, y el audio va en base64 webm.
 
 ## Decisiones técnicas no obvias
-- **Branding mixto a propósito**: el navbar usa el logo viejo de Sinergia (`public/logo.png`) y el título/footer/metadata dicen "Santiago Ignespina". Conviven por decisión del usuario; no "arreglar" sin preguntar.
+- **Branding**: desde la Vitrina la página muestra la marca Sinergia en todos lados (logo de texto `LogoSinergia` en el nav, la intro y el pie). Lo que NO se ve en la página sigue diciendo "Santiago Ignespina": título de la pestaña, metadata, JSON-LD e imagen para compartir (`app/opengraph-image.tsx`, todavía con la paleta oscura vieja). Se dejó así a propósito al pasar la Vitrina: no cambiar sin que Santiago lo pida.
 - **El dominio se resuelve en un solo lugar** (`lib/site.ts`). Antes estaba duplicado en layout, sitemap y robots con tres fallbacks distintos y ninguno era el real.
 - **El webhook de n8n no se llama desde el navegador**: va por `/api/contacto`, que además valida y tiene un honeypot (campo `empresa`). Si se vuelve a llamar directo desde el cliente, la URL queda pública otra vez.
 - **El audio se convierte a base64 con FileReader, no con `btoa(String.fromCharCode(...bytes))`**: el spread revienta el call stack arriba de ~120KB, que son ~8 segundos de grabación. `AudioRecorder` corta solo a los 120s (`MAX_SECONDS`).
 - **Las capturas de sistemas son reales pero genericizadas** (cliente → "Clínica", nombres de pacientes/sucursales → genéricos) antes del screenshot. Los nombres en `data/projects.ts` también son genéricos, sin "Mr Bracket" ni "Santos".
-- **`data/projects.ts` es el contenido del sitio**: `serviceId` decide la sección (`web` → Landings, `sistemas` → Sistemas, `automatizaciones` → Galeria). Las landings ordenan dominio propio primero y `.vercel.app` después.
+- **`data/projects.ts` es el contenido del sitio**: `serviceId` decide la sección (`web` → Landings, `sistemas` → Sistemas, `automatizaciones` → Automatizaciones). El orden vive en `lib/catalogo.ts`: las landings de `DESTACADAS` primero, después dominio propio y al final `.vercel.app`; los sistemas siguen `ORDEN_SISTEMAS`.
+- **Intro animada** (`components/vitrina/IntroBienvenida.tsx`): el logo se arma de a partes (cae "Sin", cae "erg", el "ia" entra desde la izquierda) y vuela al logo del nav. Una vez por sesión (`sessionStorage` `sinergia-intro-vista`), se saltea con clic o tecla, no corre con reduced-motion. Un script inline la esconde antes del primer pintado si ya se vio (si no, cada recarga mostraría un instante vacío) y una animación CSS la saca a los 5 s si el JS no arranca: sin eso, un error de JS dejaría la página tapada.
 - **Las capturas de n8n de las demos siguen como `<img>` crudo** (no `next/image`): se muestran al 160% de ancho dentro de un contenedor con scroll para que se lean los nodos, y están detrás de un click. El resto de las imágenes sí pasa por `next/image`.
 
 ## Pendientes / deuda conocida
@@ -56,8 +59,8 @@
 - **`NEXT_PUBLIC_N8N_WEBHOOK_URL` sigue cargada en Vercel.** Ya no la usa ningún código y el deploy actual no la expone (verificado: el host no aparece ni en el HTML ni en los chunks). Se puede borrar, pero **ojo**: si se borra, un rollback al deploy anterior deja el formulario sin webhook.
 - **lse.com.ar está roto y por eso quedó afuera del portfolio**: el dominio resuelve al hosting viejo (DonWeb/Ferozo) y sirve "Su sitio web no posee certificado SSL" en lugar del sitio, que sí está bien deployado en Vercel. Hay que corregir los registros DNS del dominio.
 - Sin rate limit en `/api/contacto`. Hay honeypot y validación, pero un bot dedicado igual puede spamear.
-- Las demos de automatizaciones (`components/demos/`) todavía muestran nombres de pacientes y "/Mr.Bracket" en algunas pantallas — pendiente genericizar.
-- 4 warnings de eslint preexistentes (variables sin usar en BrideonDemo, CRMDemo, RecordatorioDemo).
+- 2 warnings de eslint preexistentes (variables sin usar en CRMDemo y RecordatorioDemo).
+- **Decisiones abiertas de la Vitrina**: la tarjeta "E-commerce" de "Lo que hacemos" y la palabra e-commerce en la metadata siguen, aunque las tiendas online salieron del portfolio; título, metadata e imagen para compartir siguen como "Santiago Ignespina" (ver Branding).
 - Proyectos en Vercel no incluidos en el portfolio por no estar deployados/accesibles: robiar, garra-duo, martin-estrella, ventacar, criaderoatr, planarq. naivres se sacó (el cliente bloqueó el sitio).
 - Warning de build: hay dos `package-lock.json` (este y uno en `C:\Users\santi\`) y Turbopack infiere mal la raíz del workspace.
 

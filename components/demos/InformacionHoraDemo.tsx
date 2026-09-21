@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const screens = ["Flujo n8n", "Datos"] as const;
+const screens = ["Datos", "Flujo n8n"] as const;
 type Screen = (typeof screens)[number];
 
 const N8N_BG     = "#111118";
@@ -9,17 +9,17 @@ const N8N_BORDER = "#2e2e42";
 const ORANGE     = "#ff6d3f";
 
 const filas = [
-  { fecha:"2026-04-03", paciente:"Belkys Sánchez",    estudio:"Arco Niti",        monto:"$51.333", metodo:"Tarjeta", profesional:"Dra. López",   sucursal:"Morón"    },
-  { fecha:"2026-04-03", paciente:"Yazmin Cuello",      estudio:"Control de corp.", monto:"$18.000", metodo:"Efectivo",profesional:"Dr. Méndez",   sucursal:"Rivadavia"},
-  { fecha:"2026-04-03", paciente:"Valentina Scutella", estudio:"Arco Niti",        monto:"$51.333", metodo:"Tarjeta", profesional:"Dra. López",   sucursal:"San Martín"},
-  { fecha:"2026-04-03", paciente:"Camila Silveira",    estudio:"Arco Niti",        monto:"$51.333", metodo:"Débito",  profesional:"Dr. Méndez",   sucursal:"Morón"    },
-  { fecha:"2026-04-03", paciente:"Silvana Borda",      estudio:"Limpieza",         monto:"$22.000", metodo:"Efectivo",profesional:"Dra. Reyes",   sucursal:"Rivadavia"},
-  { fecha:"2026-04-03", paciente:"Belen Repetto",      estudio:"Bracket Metálico", monto:"$154.000",metodo:"Tarjeta", profesional:"Dr. Méndez",   sucursal:"Morón"    },
-  { fecha:"2026-04-03", paciente:"Martina Rodriguez",  estudio:"Arco Acero",       monto:"$38.500", metodo:"Efectivo",profesional:"Dra. López",   sucursal:"San Martín"},
+  { fecha:"2026-04-03", paciente:"Ana Pérez",    estudio:"Arco Niti",        monto:"$51.333", metodo:"Tarjeta", profesional:"Dra. López",   sucursal:"Centro"    },
+  { fecha:"2026-04-03", paciente:"Laura Díaz",      estudio:"Control de corp.", monto:"$18.000", metodo:"Efectivo",profesional:"Dr. Méndez",   sucursal:"Norte"},
+  { fecha:"2026-04-03", paciente:"Sofía Gómez", estudio:"Arco Niti",        monto:"$51.333", metodo:"Tarjeta", profesional:"Dra. López",   sucursal:"Oeste"},
+  { fecha:"2026-04-03", paciente:"Julia Torres",    estudio:"Arco Niti",        monto:"$51.333", metodo:"Débito",  profesional:"Dr. Méndez",   sucursal:"Centro"    },
+  { fecha:"2026-04-03", paciente:"Carla Romero",      estudio:"Limpieza",         monto:"$22.000", metodo:"Efectivo",profesional:"Dra. Reyes",   sucursal:"Norte"},
+  { fecha:"2026-04-03", paciente:"Paula Castro",      estudio:"Bracket Metálico", monto:"$154.000",metodo:"Tarjeta", profesional:"Dr. Méndez",   sucursal:"Centro"    },
+  { fecha:"2026-04-03", paciente:"Lucía Morales",  estudio:"Arco Acero",       monto:"$38.500", metodo:"Efectivo",profesional:"Dra. López",   sucursal:"Oeste"},
 ];
 
 export default function InformacionHoraDemo() {
-  const [screen, setScreen] = useState<Screen>("Flujo n8n");
+  const [screen, setScreen] = useState<Screen>("Datos");
 
   return (
     <div className="w-full h-full flex flex-col overflow-hidden rounded-xl select-none"

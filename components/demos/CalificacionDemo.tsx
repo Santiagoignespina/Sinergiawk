@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const screens = ["Flujo n8n", "WhatsApp", "Google"] as const;
+const screens = ["WhatsApp", "Flujo n8n", "Google"] as const;
 type Screen = (typeof screens)[number];
 
 const N8N_BG    = "#111118";
@@ -21,7 +21,7 @@ Si recomendas a alguien, y se instala con nosotros, TE REGALAMOS un control.
 Muchas gracias!! 😊`;
 
 export default function CalificacionDemo() {
-  const [screen, setScreen] = useState<Screen>("Flujo n8n");
+  const [screen, setScreen] = useState<Screen>("WhatsApp");
 
   return (
     <div className="w-full h-full flex flex-col overflow-hidden rounded-xl select-none"

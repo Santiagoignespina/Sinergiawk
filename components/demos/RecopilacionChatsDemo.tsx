@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const screens = ["Flujo n8n", "Chats", "Análisis"] as const;
+const screens = ["Chats", "Flujo n8n", "Análisis"] as const;
 type Screen = (typeof screens)[number];
 
 const N8N_BG     = "#111118";
@@ -30,7 +30,7 @@ const dias = [
 const maxConsultas = Math.max(...dias.map(d => d.consultas));
 
 export default function RecopilacionChatsDemo() {
-  const [screen, setScreen] = useState<Screen>("Flujo n8n");
+  const [screen, setScreen] = useState<Screen>("Chats");
 
   return (
     <div className="w-full h-full flex flex-col overflow-hidden rounded-xl select-none"

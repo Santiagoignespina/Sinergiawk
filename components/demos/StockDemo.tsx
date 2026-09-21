@@ -61,7 +61,7 @@ export default function StockDemo() {
         </div>
         <div className="flex items-center gap-1 text-white/70" style={{ fontSize: 7 }}>
           <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
-          Boatti
+          Centro
         </div>
       </div>
 
@@ -148,7 +148,7 @@ export default function StockDemo() {
 
           {/* Footer info */}
           <div className="px-3 py-1 bg-white border-t border-gray-100 flex items-center justify-between shrink-0" style={{ fontSize: 7 }}>
-            <span className="text-gray-400">{productos.length} productos · Sucursal: Boatti</span>
+            <span className="text-gray-400">{productos.length} productos · Sucursal: Centro</span>
             <span className="flex items-center gap-0.5 text-green-500 font-medium">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
               Sincronizado

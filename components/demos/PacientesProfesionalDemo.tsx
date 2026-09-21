@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const screens = ["Flujo n8n", "Datos"] as const;
+const screens = ["Datos", "Flujo n8n"] as const;
 type Screen = (typeof screens)[number];
 
 const N8N_BG     = "#111118";
@@ -9,16 +9,16 @@ const N8N_BORDER = "#2e2e42";
 const ORANGE     = "#ff6d3f";
 
 const filas = [
-  { fecha:"2026-03-31", profesional:"Dra. López",   paciente:"Valentina Scutella", estudio:"Arco Niti",        cantidad:1 },
-  { fecha:"2026-03-31", profesional:"Dr. Méndez",   paciente:"Belen Repetto",      estudio:"Bracket Metálico", cantidad:1 },
-  { fecha:"2026-04-01", profesional:"Dra. López",   paciente:"Camila Silveira",    estudio:"Arco Niti",        cantidad:1 },
-  { fecha:"2026-04-01", profesional:"Dra. Reyes",   paciente:"Silvana Borda",      estudio:"Limpieza",         cantidad:1 },
-  { fecha:"2026-04-02", profesional:"Dr. Méndez",   paciente:"Javier Amarilla",    estudio:"Arco Niti",        cantidad:1 },
-  { fecha:"2026-04-02", profesional:"Dra. Herrera", paciente:"Lucia Campanella",   estudio:"Control porcel.",  cantidad:1 },
-  { fecha:"2026-04-03", profesional:"Dra. López",   paciente:"Martina Rodriguez",  estudio:"Arco Acero",       cantidad:1 },
-  { fecha:"2026-04-03", profesional:"Dr. Méndez",   paciente:"Belkys Sánchez",     estudio:"Arco Niti",        cantidad:1 },
-  { fecha:"2026-04-04", profesional:"Dra. Reyes",   paciente:"Nicole Suilar",      estudio:"Limpieza",         cantidad:1 },
-  { fecha:"2026-04-04", profesional:"Dra. Herrera", paciente:"Eliel Noir",         estudio:"RX Panorámica",    cantidad:1 },
+  { fecha:"2026-03-31", profesional:"Dra. López",   paciente:"Sofía Gómez", estudio:"Arco Niti",        cantidad:1 },
+  { fecha:"2026-03-31", profesional:"Dr. Méndez",   paciente:"Paula Castro",      estudio:"Bracket Metálico", cantidad:1 },
+  { fecha:"2026-04-01", profesional:"Dra. López",   paciente:"Julia Torres",    estudio:"Arco Niti",        cantidad:1 },
+  { fecha:"2026-04-01", profesional:"Dra. Reyes",   paciente:"Carla Romero",      estudio:"Limpieza",         cantidad:1 },
+  { fecha:"2026-04-02", profesional:"Dr. Méndez",   paciente:"Diego Suárez",    estudio:"Arco Niti",        cantidad:1 },
+  { fecha:"2026-04-02", profesional:"Dra. Herrera", paciente:"Valeria Ortiz",   estudio:"Control porcel.",  cantidad:1 },
+  { fecha:"2026-04-03", profesional:"Dra. López",   paciente:"Lucía Morales",  estudio:"Arco Acero",       cantidad:1 },
+  { fecha:"2026-04-03", profesional:"Dr. Méndez",   paciente:"Ana Pérez",     estudio:"Arco Niti",        cantidad:1 },
+  { fecha:"2026-04-04", profesional:"Dra. Reyes",   paciente:"Florencia Ríos",      estudio:"Limpieza",         cantidad:1 },
+  { fecha:"2026-04-04", profesional:"Dra. Herrera", paciente:"Tomás Acosta",         estudio:"RX Panorámica",    cantidad:1 },
 ];
 
 const resumen = [
@@ -29,7 +29,7 @@ const resumen = [
 ];
 
 export default function PacientesProfesionalDemo() {
-  const [screen, setScreen] = useState<Screen>("Flujo n8n");
+  const [screen, setScreen] = useState<Screen>("Datos");
   const [vista, setVista] = useState<"detalle"|"resumen">("resumen");
 
   return (

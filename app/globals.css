@@ -1,44 +1,151 @@
 @import "tailwindcss";
 
-@theme inline {
-  --color-accent: #FF4D00;
-  --color-bg: #0A0A0A;
-  --color-surface: #121212;
-  --color-surface-2: #1a1a1a;
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-space-grotesk);
-}
+/* =========================================================================
+   Base del sitio.
+   Acá va SOLO lo que tiene que ser global: reset, el escenario de las demos y
+   el logotipo. Paleta y tipografía las declara la Vitrina en .v-vitrina
+   (components/vitrina/vitrina.css).
+   ========================================================================= */
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: #0A0A0A;
-  color: #fafafa;
-  font-family: var(--font-inter), system-ui, sans-serif;
+  margin: 0;
+  min-height: 100dvh;
 }
 
-.font-display {
-  font-family: var(--font-space-grotesk), system-ui, sans-serif;
+img {
+  max-width: 100%;
 }
 
-.gradient-text {
-  background: linear-gradient(120deg, #ffffff 0%, #FF4D00 120%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* El color del área de overscroll: sin esto, al hacer scroll más allá del
+   borde aparece el blanco del body. */
+html:has(.v-vitrina) { background: #ece9e2; }
+
+/* =========================================================================
+   Escenario de demos
+   ========================================================================= */
+
+.demo-stage {
+  container-type: inline-size;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 380 / 210;
+  overflow: hidden;
 }
 
-.card-hover {
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+.demo-stage__lienzo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 380px;
+  height: 210px;
+  transform-origin: top left;
+  /* La división longitud/longitud da un número puro, que es lo que scale() pide.
+     Con `/ 380` (sin unidad) el resultado es una longitud y el transform se
+     descarta entero. Si un browser viejo no soporta la división, el transform
+     queda en none y la demo se ve a tamaño natural: degrada, no rompe. */
+  transform: scale(calc(100cqw / 380px));
+
+  /* Corta la herencia de la variante. Las demos usan clases de Tailwind e
+     inline styles: cualquier propiedad heredable del contenedor les llega. */
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-align: left;
+  text-indent: 0;
+  color: #111;
 }
 
-.card-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 50px rgba(255, 77, 0, 0.12);
+/* =========================================================================
+   Marco de demos
+   ========================================================================= */
+
+.demo-marco {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--marco-radio, 14px);
+  border: var(--marco-linea, 1px) solid var(--marco-borde, rgba(0, 0, 0, 0.12));
+  background: var(--marco-paspartu, #e9e9ec);
 }
 
-.accent-glow {
-  box-shadow: 0 0 40px rgba(255, 77, 0, 0.12);
+.demo-marco__barra {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  background: var(--marco-barra-bg, rgba(0, 0, 0, 0.04));
+  color: var(--marco-barra-tinta, currentColor);
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.demo-marco__titulo {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.demo-marco__puntos {
+  display: inline-flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.demo-marco__puntos i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.demo-marco__paspartu {
+  padding: var(--marco-paspartu-aire, 10px);
+}
+
+/* El paspartú contrasta contra la DEMO, no contra la página:
+   demo oscura -> paspartú claro, demo clara -> paspartú oscuro. */
+.demo-marco[data-tono="oscuro"] { --marco-paspartu: #2a2b33; }
+.demo-marco[data-tono="claro"]  { --marco-paspartu: #d9dade; }
+.demo-marco[data-tono="color"]  { --marco-paspartu: #33343c; }
+
+@media (max-width: 768px) {
+  .demo-marco__paspartu { padding: var(--marco-paspartu-aire, 7px); }
+  .demo-marco__barra { padding: 6px 8px; font-size: 0.68rem; }
+}
+
+/* =========================================================================
+   Logotipo
+   El acento va en el bloque de atrás del "ia", nunca en el color del texto.
+   Cada variante define --logo-acento y --logo-acento-tinta.
+   ========================================================================= */
+
+.logo-sinergia {
+  display: inline-flex;
+  align-items: baseline;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.logo-sinergia__base {
+  font-weight: 300;
+}
+
+.logo-sinergia__ia {
+  font-weight: 800;
+  background: var(--logo-acento, currentColor);
+  color: var(--logo-acento-tinta, #fff);
+  padding: 0.06em 0.16em 0.1em 0.12em;
+  margin-left: 0.06em;
+  border-radius: 0.14em;
 }

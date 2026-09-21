@@ -1,0 +1,643 @@
+/* =========================================================================
+   Vitrina — grilla bento sobre papel hueso.
+   TODA regla arranca con .v-vitrina. Nada de selectores de elemento: las 15
+   demos van anidadas acá adentro y una regla como `.v-vitrina button` les
+   pisaría los botones.
+   ========================================================================= */
+
+.v-vitrina {
+  --hueso: #ece9e2;
+  --placa: #ffffff;
+  --tinta: #15161a;
+  --tinta-suave: #5d6068;
+  --linea: #dcd8cf;
+  --acento: #e8442b;
+  --acento-tinta: #ffffff;
+
+  --logo-acento: var(--acento);
+  --logo-acento-tinta: var(--acento-tinta);
+
+  --marco-radio: 12px;
+  --marco-linea: 1px;
+  --marco-borde: #d7d3ca;
+  --marco-barra-bg: #f4f2ed;
+  --marco-barra-tinta: #6b6e76;
+  --marco-paspartu-aire: 8px;
+
+  background: var(--hueso);
+  color: var(--tinta);
+  font-family: var(--font-vitrina), system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  min-height: 100dvh;
+}
+
+.v-vitrina .display {
+  font-size: clamp(2.6rem, 7vw, 5.4rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin: 0;
+}
+
+.v-vitrina .display--chico {
+  font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+  letter-spacing: -0.03em;
+}
+
+/* Títulos de sección (Clientes, Lo que hacemos, ¿Empezamos?): una raya del color de la marca debajo,
+   para que no se confundan con los subtítulos de cada grupo (Landings, Sistemas, Automatizaciones). */
+.v-vitrina .display--chico::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 5px;
+  margin-top: 14px;
+  border-radius: 999px;
+  background: var(--acento);
+}
+
+/* ---------- Nav ---------- */
+
+.v-vitrina .nav {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  padding: 14px 24px;
+  background: color-mix(in srgb, var(--hueso) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--linea);
+}
+
+.v-vitrina .nav__marca { color: var(--tinta); text-decoration: none; }
+
+.v-vitrina .nav__links {
+  display: flex;
+  gap: 22px;
+  margin-left: auto;
+  font-size: 0.93rem;
+}
+
+.v-vitrina .nav__links a {
+  color: var(--tinta-suave);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.v-vitrina .nav__links a:hover { color: var(--tinta); }
+
+.v-vitrina .nav__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: var(--tinta);
+  color: var(--hueso);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.18s ease;
+}
+
+.v-vitrina .nav__cta:hover { background: var(--acento); color: var(--acento-tinta); }
+.v-vitrina .nav__wa { width: 16px; height: 16px; }
+
+/* ---------- Intro: el logo se arma cayendo de a partes y vuela al nav ---------- */
+
+.v-vitrina .intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 6vh;
+  cursor: pointer;
+  /* Red de seguridad: si el JS no arranca, a los 5 s la intro se va sola y deja
+     ver la página. Cuando el JS arranca, apaga esta animación. */
+  animation: vitrina-intro-por-si-acaso 0s linear 5s forwards;
+}
+
+@keyframes vitrina-intro-por-si-acaso {
+  to { visibility: hidden; }
+}
+
+.v-vitrina .intro__fondo { position: absolute; inset: 0; background: var(--hueso); }
+
+.v-vitrina .intro__logo {
+  position: relative;
+  font-size: clamp(3rem, 15vw, 9.5rem);
+  color: var(--tinta);
+}
+
+/* Arrancan invisibles: el JS las muestra ya fuera de la pantalla. */
+.v-vitrina .intro__pieza { opacity: 0; transform-origin: 50% 100%; }
+.v-vitrina .intro__ia-y { display: inline-block; transform-origin: 50% 100%; }
+/* En el nav el bloque es ítem del flex y mide lo que la línea; acá va envuelto y
+   quedaría más alto: inline-block lo iguala para que no salte al aterrizar. */
+.v-vitrina .intro__ia-y .logo-sinergia__ia { display: inline-block; }
+
+.v-vitrina .intro__pista {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 28px;
+  margin: 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--tinta-suave);
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-vitrina .intro { display: none; }
+}
+
+/* ---------- Portada ---------- */
+
+.v-vitrina .portada {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  padding: 56px 24px 24px;
+  max-width: 1340px;
+  margin: 0 auto;
+}
+
+.v-vitrina .portada__titulo {
+  grid-column: span 4;
+  background: var(--placa);
+  border: 1px solid var(--linea);
+  border-radius: 22px;
+  padding: clamp(28px, 4vw, 56px);
+}
+
+.v-vitrina .portada__bajada {
+  max-width: 54ch;
+  margin: 22px 0 0;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  color: var(--tinta-suave);
+}
+
+.v-vitrina .portada__cifra {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  min-height: 130px;
+  padding: 20px;
+  background: var(--placa);
+  border: 1px solid var(--linea);
+  border-radius: 18px;
+}
+
+.v-vitrina .portada__cifra strong {
+  font-size: clamp(2.1rem, 3.4vw, 3rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.v-vitrina .portada__cifra span {
+  font-size: 0.86rem;
+  color: var(--tinta-suave);
+}
+
+.v-vitrina .portada__cifra--fuerte {
+  background: var(--acento);
+  border-color: var(--acento);
+  color: var(--acento-tinta);
+}
+
+.v-vitrina .portada__cifra--fuerte span { color: color-mix(in srgb, var(--acento-tinta) 78%, transparent); }
+
+.v-vitrina .portada__cta {
+  grid-column: span 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px 28px;
+  border-radius: 18px;
+  background: var(--tinta);
+  color: var(--hueso);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.v-vitrina .portada__cta:hover { background: var(--acento); color: var(--acento-tinta); }
+.v-vitrina .portada__cta-flecha { font-size: 1.4em; line-height: 1; }
+
+/* ---------- El trabajo ---------- */
+
+.v-vitrina .trabajo {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 56px 24px 24px;
+}
+
+.v-vitrina .trabajo__encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.v-vitrina .filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.v-vitrina .filtro {
+  padding: 7px 14px;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  background: var(--placa);
+  color: var(--tinta-suave);
+  font: inherit;
+  font-size: 0.83rem;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.v-vitrina .filtro:hover { border-color: var(--tinta); color: var(--tinta); }
+
+.v-vitrina .filtro.is-activo {
+  background: var(--tinta);
+  border-color: var(--tinta);
+  color: var(--hueso);
+}
+
+/* ---------- Secciones (landings, sistemas, automatizaciones) ---------- */
+
+.v-vitrina .seccion { margin-top: 44px; }
+.v-vitrina .seccion:first-of-type { margin-top: 8px; }
+
+.v-vitrina .seccion__cabeza {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 20px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--linea);
+}
+
+.v-vitrina .seccion__titulo {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+}
+
+.v-vitrina .seccion__cant {
+  margin-left: 6px;
+  font-size: 0.7em;
+  font-weight: 400;
+  color: var(--tinta-suave);
+}
+
+.v-vitrina .seccion__bajada {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--tinta-suave);
+}
+
+.v-vitrina .seccion__mas {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  padding: 15px 20px;
+  border: 1px dashed var(--linea);
+  border-radius: 18px;
+  background: transparent;
+  color: var(--tinta);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.v-vitrina .seccion__mas:hover {
+  border-style: solid;
+  border-color: var(--tinta);
+  background: var(--placa);
+}
+
+.v-vitrina .grilla {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.v-vitrina .placa {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px;
+  background: var(--placa);
+  border: 1px solid var(--linea);
+  border-radius: 18px;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.v-vitrina .placa:hover { border-color: var(--tinta); transform: translateY(-2px); }
+.v-vitrina .placa--ancha { grid-column: span 2; }
+
+.v-vitrina .placa__visual { line-height: 0; }
+
+.v-vitrina .placa__captura {
+  position: relative;
+  aspect-ratio: 380 / 210;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--marco-borde);
+  background: var(--hueso);
+}
+
+.v-vitrina .placa__img { object-fit: cover; object-position: top; }
+
+.v-vitrina .placa__pie { display: flex; flex-direction: column; gap: 5px; flex: 1; }
+
+.v-vitrina .placa__nombre {
+  margin: 0;
+  font-size: 0.97rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.v-vitrina .placa__rubro {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--tinta-suave);
+}
+
+.v-vitrina .placa__desc {
+  margin: 6px 0 0;
+  font-size: 0.9rem;
+  color: var(--tinta-suave);
+  line-height: 1.5;
+}
+
+.v-vitrina .placa__outcome {
+  margin: 8px 0 0;
+  padding-left: 12px;
+  border-left: 2px solid var(--acento);
+  font-size: 0.88rem;
+  color: var(--tinta);
+}
+
+.v-vitrina .placa__ir {
+  font-size: 0.82rem;
+  color: var(--tinta-suave);
+  transition: color 0.18s ease;
+}
+
+.v-vitrina .placa:hover .placa__ir { color: var(--acento); }
+
+/* ---------- Servicios ---------- */
+
+.v-vitrina .servicios {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 56px 24px 24px;
+}
+
+.v-vitrina .servicios__grilla {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.v-vitrina .servicio {
+  padding: 26px 22px;
+  background: var(--placa);
+  border: 1px solid var(--linea);
+  border-radius: 18px;
+}
+
+.v-vitrina .servicio__titulo {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.015em;
+}
+
+.v-vitrina .servicio__texto {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Contacto ---------- */
+
+.v-vitrina .contacto {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 56px 24px 24px;
+}
+
+.v-vitrina .contacto__intro,
+.v-vitrina .contacto__form {
+  padding: clamp(24px, 3vw, 40px);
+  background: var(--placa);
+  border: 1px solid var(--linea);
+  border-radius: 22px;
+}
+
+.v-vitrina .contacto__bajada {
+  margin: 18px 0 26px;
+  max-width: 44ch;
+  color: var(--tinta-suave);
+}
+
+.v-vitrina .contacto__wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: #25d366;
+  color: #06331a;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.v-vitrina .contacto__wa-icono { width: 19px; height: 19px; }
+
+/* ---------- Formulario ---------- */
+
+.v-vitrina .form { display: flex; flex-direction: column; gap: 16px; }
+.v-vitrina .form__campo { display: flex; flex-direction: column; gap: 6px; }
+
+.v-vitrina .form__label {
+  font-size: 0.82rem;
+  color: var(--tinta-suave);
+}
+
+.v-vitrina .form__input {
+  padding: 12px 14px;
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  background: var(--hueso);
+  color: var(--tinta);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.v-vitrina .form__input:focus {
+  outline: none;
+  border-color: var(--acento);
+}
+
+.v-vitrina .form__textarea { resize: vertical; min-height: 110px; }
+
+.v-vitrina .form__trampa {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.v-vitrina .form__modos { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+
+.v-vitrina .form__modo {
+  padding: 10px 14px;
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  background: var(--hueso);
+  color: var(--tinta-suave);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.v-vitrina .form__modo.is-activo {
+  border-color: var(--tinta);
+  background: var(--tinta);
+  color: var(--hueso);
+}
+
+.v-vitrina .form__grabador {
+  padding: 18px;
+  border-radius: 12px;
+  background: #16171b;
+  color: #eef0f2;
+}
+
+.v-vitrina .form__error {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--acento) 12%, transparent);
+  color: var(--acento);
+  font-size: 0.88rem;
+}
+
+.v-vitrina .form__enviar {
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--acento);
+  color: var(--acento-tinta);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.18s ease;
+}
+
+.v-vitrina .form__enviar:disabled { opacity: 0.55; cursor: default; }
+
+.v-vitrina .form--exito { align-items: flex-start; gap: 8px; }
+.v-vitrina .form__exito-titulo { margin: 0; font-size: 1.3rem; font-weight: 600; }
+.v-vitrina .form__exito-texto { margin: 0; color: var(--tinta-suave); }
+
+/* ---------- Pie ---------- */
+
+.v-vitrina .pie {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 40px 24px 120px;
+  font-size: 0.83rem;
+  color: var(--tinta-suave);
+}
+
+/* ---------- WhatsApp flotante ---------- */
+
+.v-vitrina .wa-float {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #25d366;
+  color: #06331a;
+  box-shadow: 0 8px 26px rgba(37, 211, 102, 0.35);
+  transition: transform 0.22s ease;
+}
+
+.v-vitrina .wa-float:hover { transform: scale(1.07); }
+.v-vitrina .wa-float__icono { width: 27px; height: 27px; }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1000px) {
+  .v-vitrina .portada,
+  .v-vitrina .grilla,
+  .v-vitrina .servicios__grilla { grid-template-columns: repeat(2, 1fr); }
+  .v-vitrina .portada__titulo,
+  .v-vitrina .portada__cta { grid-column: span 2; }
+  .v-vitrina .contacto { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 620px) {
+  .v-vitrina .nav { gap: 14px; padding: 12px 16px; }
+  .v-vitrina .nav__links { display: none; }
+
+  .v-vitrina .portada,
+  .v-vitrina .trabajo,
+  .v-vitrina .servicios,
+  .v-vitrina .contacto,
+  .v-vitrina .pie { padding-left: 16px; padding-right: 16px; }
+
+  .v-vitrina .portada { padding-top: 32px; }
+  .v-vitrina .trabajo,
+  .v-vitrina .servicios,
+  .v-vitrina .contacto { padding-top: 40px; }
+
+  .v-vitrina .grilla,
+  .v-vitrina .servicios__grilla { grid-template-columns: 1fr; }
+  .v-vitrina .placa--ancha { grid-column: span 1; }
+  .v-vitrina .portada__cifra { min-height: 104px; }
+  .v-vitrina .pie { padding-bottom: 130px; }
+  .v-vitrina .wa-float { width: 50px; height: 50px; right: 16px; bottom: 82px; }
+}

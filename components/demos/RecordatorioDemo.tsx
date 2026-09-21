@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 
-const screens = ["Flujo n8n", "WhatsApp"] as const;
+const screens = ["WhatsApp", "Flujo n8n"] as const;
 type Screen = (typeof screens)[number];
 
 const N8N_BG    = "#111118";
@@ -20,7 +20,7 @@ Si necesitás reprogramar o cancelar, respondé a este mensaje y te ayudamos �
 
 
 export default function RecordatorioDemo() {
-  const [screen, setScreen] = useState<Screen>("Flujo n8n");
+  const [screen, setScreen] = useState<Screen>("WhatsApp");
 
   return (
     <div className="w-full h-full flex flex-col overflow-hidden rounded-xl select-none"
