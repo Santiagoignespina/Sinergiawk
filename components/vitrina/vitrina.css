@@ -651,3 +651,56 @@
 @media (max-width: 380px) {
   .v-vitrina .nav__marca .logo-sinergia { height: 40px; }
 }
+
+/* Placas en movimiento: el clip de cada landing va encima de su captura y se
+   funde recién cuando ya se mueve (components/vitrina/PlacaVideo.tsx). */
+.v-vitrina .placa__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.v-vitrina .placa__video.is-listo { opacity: 1; }
+
+/* En pantallas táctiles no hay cursor que descubra el clip: la pista avisa que
+   el dedo apoyado mueve la placa. Sin movimiento no hay clips, y tampoco pista. */
+.v-vitrina .seccion__pista { display: none; }
+
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  .v-vitrina .seccion__pista {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-basis: 100%;
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--tinta);
+  }
+  .v-vitrina .seccion__pista::before {
+    content: "";
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--acento);
+    animation: vitrina-pista-pulso 1.8s ease-out infinite;
+  }
+}
+
+@keyframes vitrina-pista-pulso {
+  from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--acento) 50%, transparent); }
+  to { box-shadow: 0 0 0 9px transparent; }
+}
+
+/* Dejar el dedo apoyado es para mirar el clip: sin esto iOS abre la vista
+   previa del link y el celular empieza a seleccionar texto. */
+.v-vitrina .placa:has(.placa__video) {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}

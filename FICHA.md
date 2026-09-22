@@ -1,6 +1,6 @@
 # FICHA — sinergia (landing sinergiawk.com)
 
-> Actualizada: 2026-09-21 (rediseño Vitrina). Regenerar con /cerrar-proyecto tras cambios grandes.
+> Actualizada: 2026-09-22 (placas en movimiento). Antes: 2026-09-21 (rediseño Vitrina). Regenerar con /cerrar-proyecto tras cambios grandes.
 
 ## Resumen
 - **Cliente**: proyecto propio (portfolio de Santiago Ignespina)
@@ -22,6 +22,7 @@
 - `npm run start` — servir el build
 - `npm run lint` — eslint
 - `python scripts/capture_shots.py` — regenera las capturas de `public/shots/` (Playwright headless, 1280x800 @2x, jpg q80). Para sumar una landing: agregar la URL al dict SITES y correr.
+- `python scripts/grabar_clips.py` — regraba los clips de `public/clips/` (uno por landing, ~10 s, 720x398, 190-500 KB) y actualiza `components/vitrina/clips.json`. Con ids (`python scripts/grabar_clips.py alpie fremli`) regraba solo esas: hacerlo cuando una landing cambia o se suma una nueva (después de su captura). Tarda ~30 s por sitio.
 - `node scripts/make-logo-transparent.mjs` — utilitario del logo
 
 ## Deploy
@@ -54,6 +55,7 @@
 - **Favicon** (`app/icon.png`, pestaña) y **`app/apple-icon.png`** (iPhone): el símbolo S del logo con su degradé, generado desde los mismos trazos; el de la pestaña con fondo transparente y el de iPhone sobre blanco (iOS no admite transparencia).
 - **`data/projects.ts` es el contenido del sitio**: `serviceId` decide la sección (`web` → Landings, `sistemas` → Sistemas, `automatizaciones` → Automatizaciones). El orden vive en `lib/catalogo.ts`: las landings de `DESTACADAS` primero, después dominio propio y al final `.vercel.app`; los sistemas siguen `ORDEN_SISTEMAS`.
 - **Intro animada** (`components/vitrina/IntroBienvenida.tsx`): el logo se arma de a partes: los dos trazos de la S entran en diagonal y encastran, cae "SIN", cae "ERG", el "IA" entra desde la izquierda por arriba de las letras y cae, aparece la frase, y el logo entero (con la frase) vuela al del nav, que es igual: aterriza exacto. Una vez por sesión (`sessionStorage` `sinergia-intro-vista`), se saltea con clic o tecla, no corre con reduced-motion. Un script inline la esconde antes del primer pintado si ya se vio (si no, cada recarga mostraría un instante vacío) y una animación CSS la saca a los 5 s si el JS no arranca: sin eso, un error de JS dejaría la página tapada. Las piezas son grupos de un SVG: los px de sus transforms son unidades del dibujo, no de pantalla.
+- **Placas en movimiento** (desde 2026-09-22, probado antes en el laboratorio como `/v/4` "Vitrina viva"): cada landing tiene un clip del sitio real recorriéndose (sin IA). Las placas están quietas; el clip corre solo con el cursor encima o con el dedo apoyado, y al soltar vuelve a la portada. Primero se probó con todas moviéndose a la vez y Santiago lo descartó: queda más limpio de a una. En el celular, la línea "Dejá el dedo sobre una landing…" avisa el gesto (solo en pantallas táctiles). Un toque corto sigue abriendo el sitio; el dedo apoyado no (y no abre el menú del link). La captura queda abajo como foto mientras carga: nunca un cuadro negro. En computadora el clip se precarga al acercarse la placa; en el celular recién al primer toque. Sin clips con reduced-motion o ahorro de datos. Los clips no se graban en tiempo real (el video de Playwright sale borroso): `grabar_clips.py` saca una foto por cuadro y ffmpeg arma el ida y vuelta. `ARRANQUE` (0,7 s) en `PlacaVideo.tsx` saltea la pausa de 0,8 s con que arranca cada clip: si se cambia `QUIETO_ARRIBA` en el script, ajustarlo.
 - **Las capturas de n8n de las demos siguen como `<img>` crudo** (no `next/image`): se muestran al 160% de ancho dentro de un contenedor con scroll para que se lean los nodos, y están detrás de un click. El resto de las imágenes sí pasa por `next/image`.
 
 ## Pendientes / deuda conocida

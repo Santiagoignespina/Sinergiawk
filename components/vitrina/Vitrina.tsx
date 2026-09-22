@@ -8,6 +8,8 @@ import DemoFrame from "@/components/comunes/DemoFrame";
 import DemoStage from "@/components/comunes/DemoStage";
 import FormContacto from "@/components/comunes/FormContacto";
 import IntroBienvenida from "./IntroBienvenida";
+import PlacaVideo from "./PlacaVideo";
+import clips from "./clips.json";
 import {
   todos,
   landings,
@@ -93,10 +95,12 @@ function Placa({
   p,
   ancha,
   destacada,
+  clip,
 }: {
   p: Project;
   ancha: boolean;
   destacada: boolean;
+  clip?: string;
 }) {
   const contenido = p.demo ? (
     <DemoFrame titulo={p.name} demo={p.demo}>
@@ -111,6 +115,7 @@ function Placa({
         sizes={ancha ? "(max-width: 640px) 100vw, 50vw" : "(max-width: 640px) 100vw, 25vw"}
         className="placa__img"
       />
+      {clip && <PlacaVideo src={clip} />}
     </div>
   ) : null;
 
@@ -184,6 +189,9 @@ function Seccion({
           {titulo} <span className="seccion__cant">{filtrados.length}</span>
         </h3>
         <p className="seccion__bajada">{bajada}</p>
+        {filtrados.some((p) => clips.includes(p.id)) && (
+          <p className="seccion__pista">Dejá el dedo sobre una landing para verla en movimiento.</p>
+        )}
       </div>
 
       <div className="grilla">
@@ -193,6 +201,7 @@ function Seccion({
             p={p}
             ancha={!!p.demo}
             destacada={DESTACADAS.includes(p.id)}
+            clip={clips.includes(p.id) ? `/clips/${p.id}.mp4` : undefined}
           />
         ))}
       </div>
