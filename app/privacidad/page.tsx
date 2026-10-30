@@ -5,7 +5,7 @@ import Link from "next/link";
 // del CRM Mr. Bracket, sección 11). Escrita según la Ley 25.326 de Protección de los Datos Personales.
 // Datos de TITULAR: los pasó Santiago el 30/10/2026.
 const TITULAR = {
-  nombre: "Santiago Ignespina",
+  nombre: "Santiago Ignacio Espina",
   cuit: "20-35366687-9",
   domicilio: "Conde 2345, Ciudad Autónoma de Buenos Aires",
   mail: "sinergia.wk@gmail.com",
