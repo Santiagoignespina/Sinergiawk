@@ -3,11 +3,11 @@ import Link from "next/link";
 
 // Política de privacidad de Sinergia (30/10/2026). La pide Meta para la app de WhatsApp (Tech Provider, plan
 // del CRM Mr. Bracket, sección 11). Escrita según la Ley 25.326 de Protección de los Datos Personales.
-// Los datos de TITULAR se completan antes de publicar: ninguno se inventó.
+// Datos de TITULAR: los pasó Santiago el 30/10/2026.
 const TITULAR = {
   nombre: "Santiago Ignespina",
-  cuit: "[COMPLETAR CUIT]",
-  domicilio: "[COMPLETAR DOMICILIO]",
+  cuit: "20-35366687-9",
+  domicilio: "Conde 2345, Ciudad Autónoma de Buenos Aires",
   mail: "sinergia.wk@gmail.com",
 };
 const ACTUALIZADA = "30 de octubre de 2026";
